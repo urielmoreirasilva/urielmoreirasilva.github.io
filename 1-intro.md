@@ -13,6 +13,4 @@ nav_order: 1
 
 #### mais observações?
 
-[//] comentário?
-
-[comment]: <> (e esse?!)
+[comment]: # Isso é um comentário?

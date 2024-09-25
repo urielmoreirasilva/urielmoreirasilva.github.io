@@ -1,30 +1,16 @@
----
-layout: page
-title: Strings e Arrays
-nav_order: 2
----
-[<img src="images/colab_favicon_small.png" style="float: right;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/_aulas/T%C3%B3pico%2002/02%20%E2%80%93%20Arrays.ipynb)
+# Tópico 2 - Strings e Arrays [<img src="images/colag_logo.svg" style="float: right; vertical-align: middle; width: 42px; height: 42px;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2002/02%20%E2%80%93%20Arrays.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 12px; vertical-align: middle; width: 36px; height: 36px;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2002/02%20%E2%80%93%20Arrays.ipynb)
 
-# Tópico 2 - Strings e Arrays
-{: .no_toc .mb-2 }
+Os `arrays` representam um conjunto básico de dados. Vamos aprender como usá-los!
 
-Vetores (Arrays) representam um conjunto básico de dados. Vamos aprender como usar os mesmos.
-{: .fs-6 .fw-300 }
-
-{: .no_toc .text-delta }
-Resultados Esperados
-
+### Resultados Esperados
 1. Entender mais sobre os tipos de variáveis em Python, em particular sobre o tipo `str` (string).
 1. Aprender um pouco sobre a biblioteca [NumPy](https://numpy.org/).
-1. Aprender o básico sobre a manipulação de arrays.
+1. Aprender o básico sobre a manipulação dos `array`s.
 
-{: .no_toc .text-delta }
-Referências
-
+### Referências
 - [BPD, Capítulos 7 a 8](https://notes.dsc10.com/)
 - [CIT, Capítulo 5](https://inferentialthinking.com/)
 
-{: .no_toc .text-delta }
 Material Adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (DCC-UFMG)](https://flaviovdf.io/fcd/) e [Uriel Silva (DEST-UFMG)](https://urielmoreirasilva.github.io)
 
 ## Strings

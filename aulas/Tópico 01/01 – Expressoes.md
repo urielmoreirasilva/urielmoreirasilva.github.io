@@ -1,30 +1,16 @@
----
-layout: page
-title: Expressões
-nav_order: 1
----
-[<img src="images/colab_favicon_small.png" style="float: right;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/_aulas/T%C3%B3pico%2001/01%20%E2%80%93%20Expressoes.ipynb)
-
-# Tópico 1 - Expressões
-{: .no_toc .mb-2 }
+# Tópico 1 - Expressões [<img src="images/colag_logo.svg" style="float: right; vertical-align: middle; width: 42px; height: 42px;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2001/01%20%E2%80%93%20Expressoes.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 12px; vertical-align: middle; width: 36px; height: 36px;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2001/01%20%E2%80%93%20Expressoes.ipynb)
 
 Primeiros passos em Python.
-{: .fs-6 .fw-300 }
 
-{: .no_toc .text-delta }
-Resultados Esperados
-
+### Resultados Esperados
 1. Aprender sobre o que é um notebook e um arquivo `.py`.
 1. Aprender a fazer matemática simples em Python.
 1. Entender as ferramentas básicas de Ciência de Dados.
 
-{: .no_toc .text-delta }
-Referências
-
+### Referências
 - [BPD, Capítulos 1 a 6](https://notes.dsc10.com/)
 - [CIT, Capítulos 3 e 4](https://inferentialthinking.com/)
 
-{: .no_toc .text-delta }
 Material Adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (DCC-UFMG)](https://flaviovdf.io/fcd/) e [Uriel Silva (DEST-UFMG)](https://urielmoreirasilva.github.io)
 
 ## Código, Python e Jupyter 💻

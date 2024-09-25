@@ -1,3 +1,1 @@
-# Teste do README
-
-## MARKDOWN!!!
+# Teste do README [*]

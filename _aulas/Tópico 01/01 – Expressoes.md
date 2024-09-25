@@ -3,7 +3,7 @@ layout: page
 title: Expressões
 nav_order: 1
 ---
-[<img src="images/colab_favicon_small.png" style="float: right;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/_aulas/T%C3%B3pico%2001/02%20%E2%80%93%20Expressoes.ipynb)
+[<img src="images/colab_favicon_small.png" style="float: right;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/_aulas/T%C3%B3pico%2001/01%20%E2%80%93%20Expressoes.ipynb)
 
 # Tópico 1 - Expressões
 {: .no_toc .mb-2 }

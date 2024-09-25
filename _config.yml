@@ -29,28 +29,6 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 
-
-# Collections for website data
-collections:
-  modules:
-  lessons:
-    permalink: '/:path/'
-    output: true
-
-# Default layouts for each collection type
-defaults:
-  - scope:
-      path: ''
-      type: modules
-    values:
-      layout: module
-  - scope:
-      path: ''
-      type: aulas
-    values:
-      layout: page
-
-
 # Build settings
 theme: minima
 plugins:

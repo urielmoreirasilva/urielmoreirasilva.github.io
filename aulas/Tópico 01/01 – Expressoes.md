@@ -11,7 +11,7 @@ Primeiros passos em Python.
 - [BPD, Capítulos 1 a 6](https://notes.dsc10.com/)
 - [CIT, Capítulos 3 e 4](https://inferentialthinking.com/)
 
-Material Adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (DCC-UFMG)](https://flaviovdf.io/fcd/) e [Uriel Silva (DEST-UFMG)](https://urielmoreirasilva.github.io)
+Material adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (DCC-UFMG)](https://flaviovdf.io/fcd/) e [Uriel Silva (DEST-UFMG)](https://urielmoreirasilva.github.io)
 
 ## Código, Python e Jupyter 💻
 

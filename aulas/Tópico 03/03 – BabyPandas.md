@@ -1,4 +1,4 @@
-# Tópico 3 – BabyPandas, DataFrames e Séries [<img src="images/colag_logo.svg" style="float: right; vertical-align: middle; width: 42px; height: 42px;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/_aulas/T%C3%B3pico%2003/03%20%E2%80%93%20BabyPandas.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 12px; vertical-align: middle; width: 36px; height: 36px;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2003/03%20%E2%80%93%20BabyPandas.ipynb)
+# Tópico 3 – BabyPandas, DataFrames e Séries [<img src="images/colag_logo.svg" style="float: right; vertical-align: middle; width: 42px; height: 42px;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2003/03%20%E2%80%93%20BabyPandas.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 12px; vertical-align: middle; width: 36px; height: 36px;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2003/03%20%E2%80%93%20BabyPandas.ipynb)
 
 `DataFrames` são objetos utilizados para representar tabelas. Vamos finalmente explorar alguns dados!
     
@@ -2493,5 +2493,5 @@ Em retrospecto, isso é bem razoável, uma vez que os vendedores dessas barracas
 - Os rótulos das linhas de um DataFrame são comumente chamados de índices.
 - Uma coluna de um DataFrame é uma série (`Series`). Séries são como arrays, mas com índices associados a elas.
 - Podemos realizar os mais diversos tipos de funções aritméticas básicas nas séries, de maneira nativa.- Os DataFrames nos permitem realizar consultas, operação em que filtramos as linhas do DataFrame pelos resultados de uma ou mais de suas colunas.
-- Para realizar consultas de maneira simples e eficiente, podemos utilizar os operadores de comparação e a propriedade de transmissão/vetorização dos DataFrames.
+- Para realizar consultas de maneira simples e eficiente, podemos utilizar os operadores de comparação e a propriedade de transmissão/vetorização dos DataFrames.
 

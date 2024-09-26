@@ -11,7 +11,7 @@ Os `arrays` representam um conjunto básico de dados. Vamos aprender como usá-l
 - [BPD, Capítulos 7 a 8](https://notes.dsc10.com/)
 - [CIT, Capítulo 5](https://inferentialthinking.com/)
 
-Material Adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (DCC-UFMG)](https://flaviovdf.io/fcd/) e [Uriel Silva (DEST-UFMG)](https://urielmoreirasilva.github.io)
+Material adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (DCC-UFMG)](https://flaviovdf.io/fcd/) e [Uriel Silva (DEST-UFMG)](https://urielmoreirasilva.github.io)
 
 ## Strings
 

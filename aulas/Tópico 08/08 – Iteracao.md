@@ -1,4 +1,4 @@
-# Tópico 8 – Iteração [<img src="images/colag_logo.svg" style="float: right; vertical-align: middle; width: 42px; height: 42px;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2008/08%20%E2%80%93%20Iteracao.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 12px; vertical-align: middle; width: 36px; height: 36px;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2008/08%20%E2%80%93%20Iteracao.ipynb)
+# Tópico 08 – Iteração [<img src="images/colag_logo.svg" style="float: right; vertical-align: middle; width: 42px; height: 42px;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2008/08%20%E2%80%93%20Iteracao.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 12px; vertical-align: middle; width: 36px; height: 36px;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2008/08%20%E2%80%93%20Iteracao.ipynb)
 
 Vamos aprender sobre os _laços_ (_loops_) em Python e um pouco sobre como gerar dados.
 
@@ -948,7 +948,7 @@ heads_array
 
 
 
-    array([3., 4., 6., ..., 3., 5., 7.])
+    array([6., 6., 2., ..., 7., 3., 5.])
 
 
 

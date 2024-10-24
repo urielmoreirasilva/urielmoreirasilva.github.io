@@ -806,7 +806,7 @@ Podemos então também dizer, com 95% de confiança, que a moeda é justa, uma v
 
 - Finalmente, o p-valor do teste de $\hat{\alpha} = 21.48\%$ nos diz que um resultado como $T_{obs} = 188$ caras, ou uma proporção de $p_{obs} = 0.47$ em $n = 400$ lançamentos de _uma moeda justa_ (isto é, sob $H_0$), **não é tão atípico** assim.
 
-**Não podemos dizer então que esse é um resultado significante** e logo **rejeitamos $H_0$**, pois a probabilidade de obtermos um resultado como esse por puro acaso é de 21.48%, o que ao nível de $\alpha = 5\%$ é considerada aceitável.
+**Não podemos dizer então que esse é um resultado significante** e logo **não rejeitamos $H_0$**, pois a probabilidade de obtermos um resultado como esse por puro acaso é de 21.48%, o que ao nível de $\alpha = 5\%$ é considerada aceitável.
 
 ## Resumo
 

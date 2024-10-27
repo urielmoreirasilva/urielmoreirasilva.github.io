@@ -128,7 +128,7 @@ plt.ylabel("Frequência");
 
 - **Definição**: Soma de todos os elementos da amostra, dividida pelo tamanho amostral $n$.
     - É comum denotarmos a média _populacional_ por $\mu$ e a média _amostral_ por $\bar{X}$.
-    - Denotando nosso conjunto de observações por $\boldsymbol{X} := (X_1, \ldots, X_n)$, definimos então $\bar{X} := \sum^n_{i=1} X_i$.  
+    - Denotando nosso conjunto de observações por $\boldsymbol{X} := (X_1, \ldots, X_n)$, definimos então $\bar{X} := \frac{1}{n} \sum^n_{i=1} X_i$.  
 
 - Visualmente, a média amostral pode ser pensada como o "ponto de equilíbrio" de uma distribuição.
     - A soma das diferenças entre cada ponto e a média é sempre igual a 0.

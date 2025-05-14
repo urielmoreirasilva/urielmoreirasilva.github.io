@@ -1,4 +1,4 @@
-# Tópico 12 – Distribuições e Amostragem [<img src="images/colag_logo.svg" style="float: right; vertical-align: middle; width: 42px; height: 42px;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2012/12%20%E2%80%93%20Amostragem.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 12px; vertical-align: middle; width: 36px; height: 36px;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2012/12%20%E2%80%93%20Amostragem.ipynb)
+# Tópico 12 – Distribuições e Amostragem [<img src="images/colag_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 6.5%;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2012/12%20%E2%80%93%20Amostragem.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 3.25%;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2012/12%20%E2%80%93%20Amostragem.ipynb)
 
 Os conceitos de "distribuição" e "amostragem" são essenciais na quantificação e no entendimento da aleatoriedade dos dados. Nessa aula, vamos aprender a  como incluir a incerteza do processo de amostragem nos nossos resultados.
 
@@ -190,6 +190,48 @@ for num_rolls in [10, 50, 100, 500, 1000, 5000, 10000]:
     plt.ylabel('Frequência')
 ```
 
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_16_0.png)
+    
+
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_16_1.png)
+    
+
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_16_2.png)
+    
+
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_16_3.png)
+    
+
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_16_4.png)
+    
+
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_16_5.png)
+    
+
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_16_6.png)
+    
+
+
 #### ... e porque isso acontece? ⚖️
 
 A **Lei dos Grandes Números** diz que se um experimento aleatório for repetido 
@@ -247,6 +289,13 @@ colleges = np.array(['UFMG', 'USP', 'UEMG',
 np.random.choice(colleges, 3, replace=False)
 ```
 
+
+
+
+    array(['UEMG', 'UFRJ', 'USP'], dtype='<U7')
+
+
+
 Se declararmos `replace=True`, então estaremos amostrando uniformemente com reposição.
 
 ### Exemplo: Atrasos de vôos ✈️
@@ -260,6 +309,90 @@ Para o restante desse tópico, assuma que essa base de dados seja a nossa _popul
 united_full = bpd.read_csv('data/united_summer2015.csv')
 united_full
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Flight Number</th>
+      <th>Destination</th>
+      <th>Delay</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6/1/15</td>
+      <td>73</td>
+      <td>HNL</td>
+      <td>257</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6/1/15</td>
+      <td>217</td>
+      <td>EWR</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6/1/15</td>
+      <td>237</td>
+      <td>STL</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>13822</th>
+      <td>8/31/15</td>
+      <td>1994</td>
+      <td>ORD</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>13823</th>
+      <td>8/31/15</td>
+      <td>2000</td>
+      <td>PHX</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>13824</th>
+      <td>8/31/15</td>
+      <td>2013</td>
+      <td>EWR</td>
+      <td>-2</td>
+    </tr>
+  </tbody>
+</table>
+<p>13825 rows × 4 columns</p>
+</div>
+
+
 
 #### Amostrando linhas de um DataFrame
 
@@ -280,10 +413,148 @@ united_full.sample(5)
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Flight Number</th>
+      <th>Destination</th>
+      <th>Delay</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4859</th>
+      <td>7/3/15</td>
+      <td>721</td>
+      <td>EWR</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>4128</th>
+      <td>6/28/15</td>
+      <td>1159</td>
+      <td>LAX</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>8086</th>
+      <td>7/24/15</td>
+      <td>1717</td>
+      <td>ORD</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>764</th>
+      <td>6/6/15</td>
+      <td>300</td>
+      <td>HNL</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <th>6112</th>
+      <td>7/12/15</td>
+      <td>276</td>
+      <td>EWR</td>
+      <td>-3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
 ```python
 # 5 vôos escolhidos aleatoriamente, *com* reposição.
 united_full.sample(5, replace = True)
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Flight Number</th>
+      <th>Destination</th>
+      <th>Delay</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11306</th>
+      <td>8/14/15</td>
+      <td>1216</td>
+      <td>LAS</td>
+      <td>-4</td>
+    </tr>
+    <tr>
+      <th>301</th>
+      <td>6/3/15</td>
+      <td>267</td>
+      <td>PHL</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>3313</th>
+      <td>6/23/15</td>
+      <td>311</td>
+      <td>PHX</td>
+      <td>-5</td>
+    </tr>
+    <tr>
+      <th>8243</th>
+      <td>7/25/15</td>
+      <td>1957</td>
+      <td>MCO</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>10327</th>
+      <td>8/8/15</td>
+      <td>734</td>
+      <td>ORD</td>
+      <td>-2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 **Nota**: A probabilidade de observarmos a mesma linha mais de uma vez ao reamostrarmos com reposição nesse caso é muito baixa, uma vez que aqui o tamanho amostral (5) é pequeno relativo ao tamanho da população (13825).
 
@@ -307,12 +578,78 @@ united
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Delay</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>257</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>13822</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>13823</th>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>13824</th>
+      <td>-2</td>
+    </tr>
+  </tbody>
+</table>
+<p>13825 rows × 1 columns</p>
+</div>
+
+
+
+
 ```python
 bins = np.arange(-20, 300, 10)
 united.plot(kind = 'hist', y = 'Delay', bins = bins, density = True, ec = 'w', 
             title='Distribuição Populacional dos Atrasos de Vôos', figsize = (8, 3))
 plt.ylabel('Densidade');
 ```
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_47_0.png)
+    
+
 
 Nota: como a população contém todos os valores nos quais estamos interessados, dizemos que a distribuição populacional é "determinística", ou "fixa".,
 
@@ -335,6 +672,12 @@ sample_size = 100 # Mude esse valor e veja o que acontece!
 )
 plt.ylabel('Frequência');
 ```
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_50_0.png)
+    
+
 
 Intuitivamente, à medida em que aumentamos o tamanho amostral $n$ (`sample_size`), a distribuição empírica dos atrasos fica cada vez mais parecida com a distribuição populacional!
 
@@ -380,6 +723,13 @@ united_mean = united.get('Delay').mean()
 united_mean
 ```
 
+
+
+
+    16.658155515370705
+
+
+
 ### Média amostral
 
 - A **média amostral** é uma **estatística**.
@@ -394,6 +744,13 @@ No nosso exemplo, se coletarmos uma amostra de tamanho $n$ = `sample_size`, a m�
 sample_size = 100
 united.sample(sample_size).get('Delay').mean()
 ```
+
+
+
+
+    11.89
+
+
 
 - Cada vez que executamos a célula acima, nós estamos:
     - Coletando uma nova amostra aleatória de tamanho $n$ = `sample_size`.
@@ -413,6 +770,13 @@ E se coletarmos um tamanho de amostra maior?
 sample_size = 1000
 united.sample(sample_size).get('Delay').mean()
 ```
+
+
+
+
+    14.178
+
+
 
 - Cada vez que executamos a célula acima, os resultados ainda são _ligeiramente diferentes_ da média populacional.
 - Entretanto, se compararmos à situação anterior em que $n = 100$, as médias amostrais agora são _muito mais próximas entre si_ – e também _mais próximas à média populacional_.
@@ -481,6 +845,12 @@ plt.legend()
 plt.ylabel('Densidade');
 ```
 
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_87_0.png)
+    
+
+
 #### Mas afinal, por que calcular a distribuição empírica amostral de uma estatística?
 
 - Na prática, coletamos apenas _uma_ amostra da população, da qual calculamos apenas _um_ valor da estatística de interesse.
@@ -516,6 +886,12 @@ plt.axvline(x = united_mean, c = 'black', linewidth = 4, label = 'média populac
 plt.legend()
 plt.ylabel('Densidade');
 ```
+
+
+    
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_93_0.png)
+    
+
 
 ### Exercício ✅
 

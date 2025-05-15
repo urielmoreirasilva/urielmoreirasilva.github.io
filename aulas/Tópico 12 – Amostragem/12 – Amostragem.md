@@ -1,4 +1,4 @@
-# Tópico 12 – Distribuições e Amostragem [<img src="images/colag_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 6.5%;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2012/12%20%E2%80%93%20Amostragem.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 3.25%;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2012/12%20%E2%80%93%20Amostragem.ipynb)
+# Tópico 12 – Distribuições e Amostragem [<img src="images/colag_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 6.5%;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2012%20%E2%80%93%20Amostragem/12%20%E2%80%93%20Amostragem.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 3.25%;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2012%20%E2%80%93%20Amostragem/12%20%E2%80%93%20Amostragem.ipynb)
 
 Os conceitos de "distribuição" e "amostragem" são essenciais na quantificação e no entendimento da aleatoriedade dos dados. Nessa aula, vamos aprender a  como incluir a incerteza do processo de amostragem nos nossos resultados.
 
@@ -15,14 +15,14 @@ Material adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (
 
 
 ```python
-# Imports para esse tópico.
+# Imports para esse tópico
 import numpy as np
 import babypandas as bpd
 import pandas as pd
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
-# Opções de como printar objetos do Numpy e do Pandas.
+# Opções de como printar objetos do Numpy e do Pandas
 np.set_printoptions(threshold = 20, precision = 2, suppress = True)
 pd.set_option("display.max_rows", 7)
 pd.set_option("display.max_columns", 8)
@@ -34,16 +34,17 @@ pd.set_option("display.precision", 2)
 ### Distribuições de probabilidade
 
 - Seja $X$ uma **variável aleatória** tomando diferentes valores, cada um com uma probabilidade diferente.
-- Uma **distribuição de probabilidade** descreve:
-    - Todos os _possíveis valores_ da variável aleatória $X$;
+- A **distribuição de probabilidade de $X$** descreve:
+    - Todos os _possíveis valores_ de $X$;
     - A probabilidade **teórica** de cada um desses valores.
 
-- Uma variável aleatória (v.a.) é um _característico numérico de um experimento aleatório_, i.e. que associa valores _numéricos_ a diferentes elementos do _espaço amostral_.
-    - Por exemplo, no lançamento de uma moeda, o espaço amostral é $\{H, T\}$. Podemos definir então uma v.a. $X \in \{0, 1\}$, onde $X = 0$ se a moeda for cara ($H$) e $X = 1$ se a moeda for coroa. Como $P(H) = P(T) = 1/2$, temos também $P(X = 0) = P(X = 1) = 1/2$.
+- Uma variável aleatória (v.a.) é um "_característico numérico de um experimento aleatório_", i.e. que associa valores _numéricos_ (em $\mathbb{R}$) a diferentes elementos do _espaço amostral_ ($\Omega$).
+    - Por exemplo, no lançamento de uma moeda, o espaço amostral é $\Omega = \{H, T\}$. Podemos definir então uma v.a. $X \in \{0, 1\}$, onde $X = 0$ se a moeda for cara ($H$) e $X = 1$ se a moeda for coroa. Como $P(H) = P(T) = 1/2$, temos também $P(X = 0) = P(X = 1) = 1/2$.
 
 ### Exemplo: Distribuição de probabilidade do lançamento de um dado 🎲
 
-A distribuição nesse caso é denominada **uniforme**, pois cada face do dado têm a mesma probabilidade de ocorrência.
+- Uma possível v.a. aqui é $X \in \{1, 2, 3, 4, 5, 6\}$, onde cada valor de $X$ têm probabilidade igual a $1/6$.
+- A distribuição de $X$ nesse caso é denominada **uniforme**, pois cada um de seus valores (correspondentes à cada face do dado) têm a mesma probabilidade de ocorrência.
 
 
 ```python
@@ -126,7 +127,7 @@ plt.ylabel('Probabilidade');
 
 ### Distribuições empíricas
 
-- Ao contrário das distribuições de probabilidade, que por definição são _teóricas_, **as distribuições empíricas são baseadas em observações dos dados**.
+- Ao contrário das distribuições de probabilidade, que por definição são _teóricas_, **as distribuições empíricas** são _baseadas em observações dos dados_.
 - Uma **distribuição empírica** descreve:
     - Todos os valores _observados_ de uma variável aleatória $X$.
     - A proporção (ou a **frequência**) dos experimentos com que cada valor ocorreu.
@@ -137,10 +138,13 @@ plt.ylabel('Probabilidade');
 ### Exemplo: Distribuição empírica do lançamento de um dado 🎲
 - Vamos simular o lançamento de um dado 25 vezes utilizando a função `np.random.choice`.
 - Para simular o lançamento de um dado, precisamos amostrar **com reposição**.
-    - Definiremos "reposição" mais adiante, mas aqui isso significa que se o resultado do lançamento de um dado for igual a "4", esse valor pode ocorrer mais de uma vez.
+    - Definiremos "amostragem" e "reposição" mais adiante, mas aqui isso significa que se o resultado do lançamento de um dado for igual a "4", esse valor pode ocorrer mais de uma vez.
 
 
 ```python
+## Nota: o resultado dessa função é _estocástico_
+## -- execute mais de uma vez e veja o que acontece! :)
+
 num_rolls = 25
 many_rolls = np.random.choice(die_faces, num_rolls)
 many_rolls
@@ -149,13 +153,14 @@ many_rolls
 
 
 
-    array([6, 1, 3, ..., 4, 1, 2])
+    array([2, 2, 2, ..., 6, 4, 5])
 
 
 
 
 ```python
-# Nota: o 'f' precede o título do histograma aqui para exibir o valor da variável `num_rolls`, ao invés de uma string "{num_rolls}".  
+## Nota: o 'f' precede o título do histograma aqui para exibir o valor da variável `num_rolls`, ao invés de uma string "{num_rolls}"  
+
 (bpd.DataFrame()
  .assign(face = many_rolls) 
  .plot(kind = 'hist', y = 'face', bins = bins, density = True, ec = 'w',
@@ -178,9 +183,9 @@ Agora, o que acontece quando aumentamos o número de lançamentos?
 
 ```python
 for num_rolls in [10, 50, 100, 500, 1000, 5000, 10000]:
-    # Simulando os `num_rolls` lançamentos de um dado.
+    # Simulando os `num_rolls` lançamentos de um dado
     many_rolls = np.random.choice(die_faces, num_rolls)
-    # Elaborando o histograma correspondente.
+    # Elaborando o histograma correspondente
     (bpd.DataFrame()
      .assign(face = many_rolls)
      .plot(kind = 'hist', y = 'face', bins = bins, density = True, ec = 'w', 
@@ -234,16 +239,16 @@ for num_rolls in [10, 50, 100, 500, 1000, 5000, 10000]:
 
 #### ... e porque isso acontece? ⚖️
 
-A **Lei dos Grandes Números** diz que se um experimento aleatório for repetido 
+A **Lei dos Grandes Números** diz que, se um experimento aleatório for repetido 
 1. um _grande número_ de vezes,
 1. _independentemente_,
 1. e _sobre as mesmas condições_,
 
-que então a **proporção** do número de vezes que um evento ocorre se aproxima cada vez mais da **probabilidade teórica** desse evento.
+então a **proporção** do número de vezes que um evento ocorre se aproxima cada vez mais da **probabilidade teórica** desse evento.
 
-- Por exemplo, à medida que lançamos um dado repetidas vezes, a proporção de vezes que obtemos um "5" chega cada vez mais perto de $\frac{1}{6}$.
+- Por exemplo, à medida que lançamos um dado repetidas vezes, a proporção de vezes que obtemos um "5" chega cada vez mais perto de $1/6$.
 
-- A Lei dos Grandes Números essencialmente **garante que o uso de simulações para aproximar distribuições de probabilidade esteja correto**!
+- A Lei dos Grandes Números **essencialmente garante que o uso de simulações para aproximar distribuições de probabilidade esteja correto**!
 
 ## Amostragem
 
@@ -255,11 +260,11 @@ que então a **proporção** do número de vezes que um evento ocorre se aproxim
 
 - Nessas situações, tipicamente coletamos uma **amostra**, isto é, um subconjunto da população.
 
-- Com base na amostra coletada, podemos **estimar** alguma quantidade de interesse da população.
+- Com base na amostra coletada, podemos então **estimar** alguma quantidade de interesse da população.
 
 ### Estratégias de amostragem
 
-- **Problema principal**: Como coletar uma "boa amostra", isto é tal que a **distribuição empírica** (i.e. a distribuição da amostra) seja o mais parecida possível com a distribuição populacional?
+- **Problema principal**: Como coletar uma "boa amostra", isto é, tal que a **distribuição empírica** (a distribuição da amostra) seja o mais parecida possível com a **distribuição populacional** (a distribuição da população)?
 
 - **Má ideia ❌**: Amostrar os indivíduos mais "próximos"/"fáceis"
    - Por exemplo, seus colegas de classe, as pessoas em uma fila de supermercado, etc.
@@ -276,33 +281,34 @@ Uma **amostra aleatória simples** é uma amostra coletada de maneira **uniforme
 
 ### Amostragem de uma lista ou array
 
-Para gerar uma amostra aleatória simples de uma lista ou array `options`, utilizamos a função `np.random.choice(options, n, replace=False)`.
+Para gerar uma amostra aleatória simples de tamanho `n` de uma lista ou array `population`, utilizamos a função `np.random.choice(population, n, replace = False)`.
 
 
 ```python
+## Exemplo: array de universidades
 colleges = np.array(['UFMG', 'USP', 'UEMG', 
                      'UNICAMP', 'UFRJ', 'UFPB', 
                      'UFSCar', 'UFSC', 'UFRGS'])
 
-# Amostragem aleatória simples de 3 elementos de `colleges`.
-# Nota: execute essa célula mais de uma vez e compare os resultados!
-np.random.choice(colleges, 3, replace=False)
+## Amostragem aleatória simples de 3 elementos de `colleges`
+## Nota: execute essa célula mais de uma vez e compare os resultados!
+np.random.choice(colleges, 3, replace = False)
 ```
 
 
 
 
-    array(['UEMG', 'UFRJ', 'USP'], dtype='<U7')
+    array(['UFRGS', 'USP', 'UFSC'], dtype='<U7')
 
 
 
-Se declararmos `replace=True`, então estaremos amostrando uniformemente com reposição.
+Se declararmos `replace = True`, então estaremos amostrando uniformemente _com reposição_.
 
 ### Exemplo: Atrasos de vôos ✈️
 
 Para esse exemplo, o DataFrame `united_full` contém informação sobre todos os vôos da United Airlines saindo de SFO (San Francisco International Airport) entre 01/06/2015 e 31/08/2015.
 
-Para o restante desse tópico, assuma que essa base de dados seja a nossa _população_.
+Para o restante dessa aula, assuma que essa base de dados seja a nossa _população_.
 
 
 ```python
@@ -404,11 +410,11 @@ Mais especificamente,
 df.sample(n)
 ```
 
-retorna um subconjunto aleatório  de `n` linhas de `df`, amostradas **sem reposição** (o padrão dessa função é `replace = False`, diferente de `np.random.choice`, em que o padrão é fazer a seleção **com substituição**).
+retorna um subconjunto aleatório  de `n` linhas de `df`, amostradas **sem reposição** (o padrão dessa função é `replace = False`, diferente de `np.random.choice`, em que o padrão é amostrar **com reposição**).
 
 
 ```python
-# 5 vôos escolhidos aleatoriamente, sem reposição.
+## 5 vôos escolhidos aleatoriamente, *sem* reposição
 united_full.sample(5)
 ```
 
@@ -441,39 +447,39 @@ united_full.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>4859</th>
-      <td>7/3/15</td>
-      <td>721</td>
-      <td>EWR</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>4128</th>
-      <td>6/28/15</td>
-      <td>1159</td>
-      <td>LAX</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>8086</th>
-      <td>7/24/15</td>
-      <td>1717</td>
+      <th>3259</th>
+      <td>6/22/15</td>
+      <td>1668</td>
       <td>ORD</td>
-      <td>16</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>764</th>
-      <td>6/6/15</td>
-      <td>300</td>
-      <td>HNL</td>
-      <td>63</td>
+      <th>164</th>
+      <td>6/2/15</td>
+      <td>358</td>
+      <td>LAS</td>
+      <td>-8</td>
     </tr>
     <tr>
-      <th>6112</th>
-      <td>7/12/15</td>
-      <td>276</td>
+      <th>9212</th>
+      <td>8/1/15</td>
+      <td>384</td>
+      <td>PHL</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <th>5617</th>
+      <td>7/8/15</td>
+      <td>1674</td>
       <td>EWR</td>
-      <td>-3</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <th>1790</th>
+      <td>6/12/15</td>
+      <td>1728</td>
+      <td>ATL</td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>
@@ -483,7 +489,7 @@ united_full.sample(5)
 
 
 ```python
-# 5 vôos escolhidos aleatoriamente, *com* reposição.
+## 5 vôos escolhidos aleatoriamente, *com* reposição
 united_full.sample(5, replace = True)
 ```
 
@@ -516,39 +522,39 @@ united_full.sample(5, replace = True)
   </thead>
   <tbody>
     <tr>
-      <th>11306</th>
-      <td>8/14/15</td>
-      <td>1216</td>
+      <th>9814</th>
+      <td>8/5/15</td>
+      <td>394</td>
       <td>LAS</td>
-      <td>-4</td>
+      <td>-3</td>
     </tr>
     <tr>
-      <th>301</th>
-      <td>6/3/15</td>
-      <td>267</td>
-      <td>PHL</td>
-      <td>-6</td>
-    </tr>
-    <tr>
-      <th>3313</th>
-      <td>6/23/15</td>
-      <td>311</td>
-      <td>PHX</td>
+      <th>3273</th>
+      <td>6/22/15</td>
+      <td>1727</td>
+      <td>IND</td>
       <td>-5</td>
     </tr>
     <tr>
-      <th>8243</th>
-      <td>7/25/15</td>
-      <td>1957</td>
-      <td>MCO</td>
-      <td>3</td>
+      <th>11055</th>
+      <td>8/13/15</td>
+      <td>229</td>
+      <td>IAH</td>
+      <td>30</td>
     </tr>
     <tr>
-      <th>10327</th>
-      <td>8/8/15</td>
-      <td>734</td>
-      <td>ORD</td>
+      <th>11125</th>
+      <td>8/13/15</td>
+      <td>1124</td>
+      <td>SEA</td>
       <td>-2</td>
+    </tr>
+    <tr>
+      <th>8279</th>
+      <td>7/26/15</td>
+      <td>500</td>
+      <td>ORD</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -556,7 +562,7 @@ united_full.sample(5, replace = True)
 
 
 
-**Nota**: A probabilidade de observarmos a mesma linha mais de uma vez ao reamostrarmos com reposição nesse caso é muito baixa, uma vez que aqui o tamanho amostral (5) é pequeno relativo ao tamanho da população (13825).
+**Nota**: A probabilidade de observarmos a mesma linha mais de uma vez ao reamostrarmos com reposição nesse caso é muito baixa, uma vez que aqui o tamanho amostral (5 elementos) é _pequeno_ relativo ao tamanho da população (13.825 elementos).
 
 ### O efeito do tamanho amostral
 
@@ -567,7 +573,7 @@ united_full.sample(5, replace = True)
 
 #### Distribuição populacional dos atrasos de vôos ✈️
 
-Aqui estamos interessados apenas nos `'Delay'`s, então selecionaremos apenas essa coluna.
+Aqui estamos interessados apenas nos `'Delay'`s, e logo selecionaremos apenas essa coluna.
 
 Note que os atrasos de vôos estão expressos em **minutos**, e um "atraso" negativo significa que o vôo na verdade foi adiantado.
 
@@ -651,18 +657,22 @@ plt.ylabel('Densidade');
     
 
 
-Nota: como a população contém todos os valores nos quais estamos interessados, dizemos que a distribuição populacional é "determinística", ou "fixa".,
+**Nota**: como a população contém _todos_ os valores nos quais estamos interessados, dizemos que a distribuição populacional é **determinística**, ou "fixa".,
 
 Em outras palavras, supondo que o universo de **todos** os possíveis valores nos quais estamos interessados seja **conhecido**, **não existe aleatoriedade** como em um processo de amostragem.
 
+No processo de amostragem (que é sujeito à aleatoriedade), a distribuição empírica é dita ser "variável", ou **estocástica**.
+
 #### Distribuição empírica dos atrasos de vôos ✈️
 
-- Aqui, nossa população é composta dos 13825 atrasos de vôos no DataFrame `united`.
+- Aqui, nossa população é composta dos 13.825 atrasos de vôos (`Delay`'s) no DataFrame `united`.
 - Em geral, porém, raramente temos acesso à população inteira.
 - Para replicar uma situação prática real, vamos reamostrar de `united` **sem reposição**.
 
 
 ```python
+## Nota: o resultado da função abaixo é estocástico!
+
 sample_size = 100 # Mude esse valor e veja o que acontece!
 (united
  .sample(sample_size)
@@ -679,7 +689,7 @@ plt.ylabel('Frequência');
     
 
 
-Intuitivamente, à medida em que aumentamos o tamanho amostral $n$ (`sample_size`), a distribuição empírica dos atrasos fica cada vez mais parecida com a distribuição populacional!
+Intuitivamente, à medida em que aumentamos o tamanho amostral $n$ (`sample_size`), a distribuição empírica dos atrasos fica _cada vez mais próxima_ da distribuição populacional!
 
 ## Parâmetros e estatísticas
 
@@ -697,7 +707,7 @@ Intuitivamente, à medida em que aumentamos o tamanho amostral $n$ (`sample_size
 
 - Uma estatística pode ser utilizada para **estimar** um parâmetro.
   - Como uma função matemática teórica, diz-se que uma estatística nesse caso é um **estimador** para esse parâmetro.
-  - Após coletarmos uma amostra, o _valor_ correspondete que a estatística/estimador toma é então uma **estimativa** para o parâmetro.
+  - Após coletarmos uma amostra, o _valor_ correspondente que a estatística/estimador toma é então uma **estimativa** para o parâmetro.
 
 #### Média dos atrasos de vôos ✈️
 
@@ -712,13 +722,13 @@ Intuitivamente, à medida em que aumentamos o tamanho amostral $n$ (`sample_size
 - A **média populacional** é um **parâmetro**.
 - A média populacional também é determinística/fixa, _assim como qualquer outro parâmetro_. 
 - Como quase nunca temos acesso à população completa, em geral não podemos saber com exatidão os valores dos parâmetros sobre os quais estamos interessados.
-- Em outras palavras, embora os parâmetros sejam _fixos_, em geral eles também são _desconhecidos_.
+    - Em outras palavras, embora os parâmetros sejam _fixos_, em geral eles também são _desconhecidos_.
 
 No nosso exemplo, a média populacional é dada por:
 
 
 ```python
-# Média *populacional*.
+## Média *populacional*
 united_mean = united.get('Delay').mean()
 united_mean
 ```
@@ -739,8 +749,9 @@ No nosso exemplo, se coletarmos uma amostra de tamanho $n$ = `sample_size`, a m�
 
 
 ```python
-# Média amostral com n = 100.
-# Execute essa célula mais de uma vez!
+## Média amostral com n = 100
+## Execute essa célula mais de uma vez!
+
 sample_size = 100
 united.sample(sample_size).get('Delay').mean()
 ```
@@ -748,13 +759,13 @@ united.sample(sample_size).get('Delay').mean()
 
 
 
-    11.89
+    17.84
 
 
 
 - Cada vez que executamos a célula acima, nós estamos:
-    - Coletando uma nova amostra aleatória de tamanho $n$ = `sample_size`.
-    - Calculando a média amostral correspondente.
+    1. Coletando uma nova amostra aleatória de tamanho $n$ = `sample_size`;
+    1. Calculando a média amostral correspondente.
 
 - Note que, a cada execução, a média amostral é _ligeiramente diferente_.
     - Algumas vezes, a média amostral é _próxima_ da média populacional.
@@ -766,7 +777,8 @@ E se coletarmos um tamanho de amostra maior?
 
 
 ```python
-# n = 1000.
+## Média amostral com n = 1000
+
 sample_size = 1000
 united.sample(sample_size).get('Delay').mean()
 ```
@@ -774,7 +786,7 @@ united.sample(sample_size).get('Delay').mean()
 
 
 
-    14.178
+    17.315
 
 
 
@@ -789,9 +801,9 @@ united.sample(sample_size).get('Delay').mean()
 ### Distribuição de probabilidade de uma estatística
 
 - O valor numérico de uma estatística (por exemplo a média amostral) é _aleatório_, porque é calculado com base em uma amostra (que é aleatória).
-    - Mais formalmente, estatísticas _também são variáveis aleatórias_.
+    - Mais formalmente, **estatísticas também são variáveis aleatórias**.
 
-- Assim como fazemos para variáveis aletaórias em geral, podemos analisar a distribuição de probabilidade _da estatística_ na qual estamos interessados.
+- Assim como fazemos para variáveis aleatórias em geral, podemos analisar a distribuição de probabilidade _de uma estatística_ na qual estamos interessados.
     - Essa distribuição é conhecida como **distribuição amostral**.
 
 - A distribuição amostral descreve a probabilidade de todos os possíveis valores de uma estatística.
@@ -799,46 +811,46 @@ united.sample(sample_size).get('Delay').mean()
 - De maneira análoga, a distribuição amostral nos permite dizer o quanto o valor da nossa estatística _poderia ter sido_ caso tívessemos coletado uma amostra diferente.
 
 - Temos basicamente 2 maneiras de caracterizarmos uma distribuição amostral:
-    - Opção 1: Desenvolver uma expressão **analítica** utilizando Matemática e Probabilidade (nem sempre isso é possível!).
+    - Opção 1: Desenvolver uma expressão ou aproximação **analítica** utilizando Matemática e Probabilidade (nem sempre isso é possível!).
     - Opção 2: Utilizar simulação e gerar diferentes amostras da nossa população, calculando o valor da estatística para cada amostra.
 
 - Nesse curso, focaremos na Opção 2, e utilizaremos simulação para aproximar a distribuição amostral das estatísticas nas quais estamos interessados.
     - A Opção 1 será o assunto de vários cursos de Estatística e Probabilidade que vocês terão mais adiante!
 
-### Distribuição empírica amostral
+### Distribuição amostral empírica
 
-- A _distribuição empírica amostral_ é obtida com base nos valores simulados de uma estatística.
+- A _distribuição amostral empírica_ é obtida com base nos valores simulados de uma estatística.
 - Essa distribuição descreve:    
     - Todos os valores _observados_ da estatística.
     - A frequência/proporção de amostras em que cada valor foi observado.
 
-- Em geral, a distribuição empírica de uma estatística se torna uma aproximação cada vez melhor para a distribuição amostral correspondente **à medida que o número de repetições da simulação é cada vez maior**.
+- Em geral, a distribuição empírica de uma estatística se torna uma aproximação cada vez melhor para a verdadeira distribuição amostral **à medida que o número de repetições da simulação é cada vez maior**.
 
-### Distribuição empírica amostral da média amostral
+### Distribuição amostral empírica da média amostral
 
 - Para entendermos o quão diferente o valor da média amostral pode ser em diferentes amostras, podemos fazer o seguinte:
-    1. Gerar muitas amostras aleatoriamente;
-    1. Calcular a média amostral em cada uma das amostras;
+    1. Coletar muitas amostras aleatoriamente;
+    1. Calcular a média amostral em cada uma dessas amostras;
     1. Elaborar um histograma com os valores obtidos.
 
-Retornando ao nosso exemplo, vamos proceder da maneira descrita acima, gerando $M = 2000$ amostras de tamanho $n = 100$:
+Retornando ao nosso exemplo, vamos proceder da maneira descrita acima, gerando $M = 2.000$ amostras de tamanho $n = 100$:
 
 
 ```python
-# Inicialização.
+## Inicialização
 sample_size = 100
 repetitions = 2000
 sample_means = np.array([])
 
-# Amostrando, calculando médias amostrais e agregando ao array.
+## Coletando amostras, calculando médias amostrais e agregando ao array
 for n in np.arange(repetitions):
     m = united.sample(sample_size).get('Delay').mean()
     sample_means = np.append(sample_means, m)
 
-# Elaborando o histograma com a distribuição empírica das médias amostrais.
+## Elaborando um histograma com a distribuição empírica das médias amostrais
 bpd.DataFrame().assign(sample_means = sample_means) \
                .plot(kind = 'hist', bins = np.arange(10, 25, 0.5), density = True, ec = 'w',
-                     title = f'Distribuição Empírica Amostral da Média Amostral com $n = {sample_size}$',
+                     title = f'Distribuição Amostral Empírica da Média Amostral com $n = {sample_size}$',
                      figsize = (10, 5));    
 plt.axvline(x = united_mean, c = 'black', linewidth = 4, label = 'média populacional')
 plt.legend()
@@ -851,36 +863,37 @@ plt.ylabel('Densidade');
     
 
 
-#### Mas afinal, por que calcular a distribuição empírica amostral de uma estatística?
+#### Mas afinal, por que calcular a distribuição amostral empírica de uma estatística?
 
 - Na prática, coletamos apenas _uma_ amostra da população, da qual calculamos apenas _um_ valor da estatística de interesse.
     - Em certos casos, a amostra _pode_ ser suficientemente representativa da população, e o valor da estatística será próximo ao parâmetro que estamos tentando estimar.
     - Quando isso não acontece, porém, o valor da estatística pode ser bem diferente do parâmetro de interesse!
 
-- Dessa forma, a distribuição empírica amostral de uma estatística nos ajuda a responder à seguinte pergunta: **qual seria o valor da estatística caso tívessemos coletado uma amostra diferente?**
+- Dessa forma, a distribuição amostral empírica de uma estatística nos ajuda a responder à seguinte pergunta: **qual seria o valor da estatística caso tívessemos coletado uma amostra diferente?**
 
 #### E qual o papel do tamanho amostral nesse processo?
 
 - Em geral, um tamanho amostral maior essencialmente faz com que a distribuição amostral da estatística correspondente seja **menos dispersa**, isto é, **menos variável**, em torno do verdadeiro valor do parâmetro populacional.
+    - Em outras palavras, cada valor da estatística calculada com um tamanho de amostra de maior é uma estimativa **mais precisa** para o parâmetro de interesse.
 
-Retornando mais uma vez ao nosso exemplo dos atrasos de vôos, veja o que acontece se continuarmos gerando $M = 2000$ amostras, mas agora de tamanho $n = 100$:
+Retornando mais uma vez ao nosso exemplo dos atrasos de vôos, veja o que acontece se continuarmos gerando $M = 2.000$ amostras, mas agora de tamanho $n = 1.000$:
 
 
 ```python
-# Inicialização.
+## Inicialização
 sample_size = 1000
 repetitions = 2000
 sample_means = np.array([])
 
-# Amostrando, calculando médias amostrais e agregando ao array.
+## Amostrando, calculando médias amostrais e agregando ao array
 for n in np.arange(repetitions):
     m = united.sample(sample_size).get('Delay').mean()
     sample_means = np.append(sample_means, m)
 
-# Elaborando o histograma com a distribuição empírica das médias amostrais.
+## Elaborando um histograma com a distribuição empírica das médias amostrais
 bpd.DataFrame().assign(sample_means = sample_means) \
                .plot(kind = 'hist', bins = np.arange(10, 25, 0.5), density = True, ec = 'w',
-                     title = f'Distribuição Empírica Amostral da Média Amostral com $n = {sample_size}$',
+                     title = f'Distribuição Amostral Empírica da Média Amostral com $n = {sample_size}$',
                      figsize = (10, 5));    
 plt.axvline(x = united_mean, c = 'black', linewidth = 4, label = 'média populacional')
 plt.legend()
@@ -895,11 +908,11 @@ plt.ylabel('Densidade');
 
 ### Exercício ✅
 
-Na célula acima, geramos amostras de vôos de tamanho $n = 1000$ um número $B = 2000$ de vezes. Se ao invés disso continuarmos gerando $B = 2000$ amostras, mas agora tomando amostras de tamanho $n = 10000$, qual você acha que será o efeito sobre a distribuição empírica da média amostral? 
+Na célula acima, geramos amostras de vôos de tamanho $n = 1.000$ um número $B = 2.000$ de vezes. Se ao invés disso continuarmos gerando $B = 2.000$ amostras, mas agora tomando amostras de tamanho $n = 10.000$, qual você acha que será o efeito sobre a distribuição empírica da média amostral? 
 
-A.  A distribuição empírica ficará mais "estreita".
+A.  A distribuição empírica ficará "mais estreita" (menos dispersa).
 
-B.  A distribuição empírica ficará mais "larga".
+B.  A distribuição empírica ficará "mais larga" (mais dispersa).
 
 C.  A distribuição empírica será deslocada para a esquerda.
 

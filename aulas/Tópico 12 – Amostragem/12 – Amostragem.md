@@ -49,7 +49,7 @@ pd.set_option("display.precision", 2)
 
 ```python
 die_faces = np.arange(1, 7, 1)
-die = bpd.DataFrame().assign(face = die_faces)
+die = pd.DataFrame({"face" : die_faces})
 die
 ```
 
@@ -153,7 +153,7 @@ many_rolls
 
 
 
-    array([2, 2, 2, ..., 6, 4, 5])
+    array([3, 5, 6, ..., 3, 6, 6])
 
 
 
@@ -161,8 +161,7 @@ many_rolls
 ```python
 ## Nota: o 'f' precede o título do histograma aqui para exibir o valor da variável `num_rolls`, ao invés de uma string "{num_rolls}"  
 
-(bpd.DataFrame()
- .assign(face = many_rolls) 
+(pd.DataFrame({"face" : many_rolls})
  .plot(kind = 'hist', y = 'face', bins = bins, density = True, ec = 'w',
        title = f'Distribuição empírica de {num_rolls} lançamentos de um dado',
        figsize=(5, 3))
@@ -186,8 +185,7 @@ for num_rolls in [10, 50, 100, 500, 1000, 5000, 10000]:
     # Simulando os `num_rolls` lançamentos de um dado
     many_rolls = np.random.choice(die_faces, num_rolls)
     # Elaborando o histograma correspondente
-    (bpd.DataFrame()
-     .assign(face = many_rolls)
+    (pd.DataFrame({"face" : many_rolls})
      .plot(kind = 'hist', y = 'face', bins = bins, density = True, ec = 'w', 
            title = f'Distribuição de {num_rolls} lançamentos de um dado',
            figsize=(8, 3))
@@ -298,7 +296,7 @@ np.random.choice(colleges, 3, replace = False)
 
 
 
-    array(['UFRGS', 'USP', 'UFSC'], dtype='<U7')
+    array(['UFMG', 'UEMG', 'UFSCar'], dtype='<U7')
 
 
 
@@ -312,7 +310,7 @@ Para o restante dessa aula, assuma que essa base de dados seja a nossa _populaç
 
 
 ```python
-united_full = bpd.read_csv('data/united_summer2015.csv')
+united_full = pd.read_csv('data/united_summer2015.csv')
 united_full
 ```
 
@@ -447,39 +445,114 @@ united_full.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>3259</th>
-      <td>6/22/15</td>
-      <td>1668</td>
-      <td>ORD</td>
-      <td>0</td>
+      <th>7210</th>
+      <td>7/19/15</td>
+      <td>579</td>
+      <td>DEN</td>
+      <td>6</td>
     </tr>
     <tr>
-      <th>164</th>
-      <td>6/2/15</td>
-      <td>358</td>
+      <th>12118</th>
+      <td>8/20/15</td>
+      <td>322</td>
+      <td>SEA</td>
+      <td>135</td>
+    </tr>
+    <tr>
+      <th>9607</th>
+      <td>8/3/15</td>
+      <td>1751</td>
       <td>LAS</td>
-      <td>-8</td>
+      <td>144</td>
     </tr>
     <tr>
-      <th>9212</th>
-      <td>8/1/15</td>
-      <td>384</td>
-      <td>PHL</td>
-      <td>-6</td>
+      <th>5820</th>
+      <td>7/10/15</td>
+      <td>249</td>
+      <td>IAD</td>
+      <td>6</td>
     </tr>
     <tr>
-      <th>5617</th>
-      <td>7/8/15</td>
-      <td>1674</td>
+      <th>5943</th>
+      <td>7/10/15</td>
+      <td>1717</td>
+      <td>ORD</td>
+      <td>51</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+united_full.iloc[np.random.choice(united_full.index, 5, replace = False)]
+# np.random.choice(united_full, 3) [!]
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Flight Number</th>
+      <th>Destination</th>
+      <th>Delay</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3376</th>
+      <td>6/23/15</td>
+      <td>1122</td>
+      <td>HNL</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <th>5818</th>
+      <td>7/10/15</td>
+      <td>217</td>
+      <td>BOS</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>460</th>
+      <td>6/4/15</td>
+      <td>325</td>
+      <td>BOS</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>7245</th>
+      <td>7/19/15</td>
+      <td>1168</td>
       <td>EWR</td>
-      <td>92</td>
+      <td>-2</td>
     </tr>
     <tr>
-      <th>1790</th>
-      <td>6/12/15</td>
-      <td>1728</td>
-      <td>ATL</td>
-      <td>10</td>
+      <th>9540</th>
+      <td>8/3/15</td>
+      <td>1122</td>
+      <td>HNL</td>
+      <td>31</td>
     </tr>
   </tbody>
 </table>
@@ -522,39 +595,39 @@ united_full.sample(5, replace = True)
   </thead>
   <tbody>
     <tr>
-      <th>9814</th>
-      <td>8/5/15</td>
-      <td>394</td>
+      <th>11665</th>
+      <td>8/17/15</td>
+      <td>276</td>
+      <td>EWR</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>3088</th>
+      <td>6/21/15</td>
+      <td>1298</td>
+      <td>DEN</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>5064</th>
+      <td>7/5/15</td>
+      <td>525</td>
       <td>LAS</td>
+      <td>-9</td>
+    </tr>
+    <tr>
+      <th>8064</th>
+      <td>7/24/15</td>
+      <td>1583</td>
+      <td>EWR</td>
       <td>-3</td>
     </tr>
     <tr>
-      <th>3273</th>
-      <td>6/22/15</td>
-      <td>1727</td>
-      <td>IND</td>
-      <td>-5</td>
-    </tr>
-    <tr>
-      <th>11055</th>
-      <td>8/13/15</td>
-      <td>229</td>
+      <th>9945</th>
+      <td>8/5/15</td>
+      <td>1937</td>
       <td>IAH</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>11125</th>
-      <td>8/13/15</td>
-      <td>1124</td>
-      <td>SEA</td>
-      <td>-2</td>
-    </tr>
-    <tr>
-      <th>8279</th>
-      <td>7/26/15</td>
-      <td>500</td>
-      <td>ORD</td>
-      <td>2</td>
+      <td>31</td>
     </tr>
   </tbody>
 </table>
@@ -579,7 +652,7 @@ Note que os atrasos de vôos estão expressos em **minutos**, e um "atraso" nega
 
 
 ```python
-united = united_full.get(['Delay'])
+united = pd.DataFrame(united_full['Delay']) ## [!]
 united
 ```
 
@@ -653,11 +726,11 @@ plt.ylabel('Densidade');
 
 
     
-![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_47_0.png)
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_48_0.png)
     
 
 
-**Nota**: como a população contém _todos_ os valores nos quais estamos interessados, dizemos que a distribuição populacional é **determinística**, ou "fixa".,
+**Nota**: como a população contém _todos_ os valores nos quais estamos interessados, dizemos que a distribuição populacional é **determinística**, ou "fixa".
 
 Em outras palavras, supondo que o universo de **todos** os possíveis valores nos quais estamos interessados seja **conhecido**, **não existe aleatoriedade** como em um processo de amostragem.
 
@@ -685,7 +758,7 @@ plt.ylabel('Frequência');
 
 
     
-![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_50_0.png)
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_51_0.png)
     
 
 
@@ -729,7 +802,7 @@ No nosso exemplo, a média populacional é dada por:
 
 ```python
 ## Média *populacional*
-united_mean = united.get('Delay').mean()
+united_mean = united['Delay'].mean()
 united_mean
 ```
 
@@ -753,13 +826,13 @@ No nosso exemplo, se coletarmos uma amostra de tamanho $n$ = `sample_size`, a m�
 ## Execute essa célula mais de uma vez!
 
 sample_size = 100
-united.sample(sample_size).get('Delay').mean()
+united.sample(sample_size)['Delay'].mean()
 ```
 
 
 
 
-    17.84
+    10.8
 
 
 
@@ -780,13 +853,13 @@ E se coletarmos um tamanho de amostra maior?
 ## Média amostral com n = 1000
 
 sample_size = 1000
-united.sample(sample_size).get('Delay').mean()
+united.sample(sample_size)['Delay'].mean()
 ```
 
 
 
 
-    17.315
+    16.237
 
 
 
@@ -844,11 +917,11 @@ sample_means = np.array([])
 
 ## Coletando amostras, calculando médias amostrais e agregando ao array
 for n in np.arange(repetitions):
-    m = united.sample(sample_size).get('Delay').mean()
+    m = united.sample(sample_size)['Delay'].mean()
     sample_means = np.append(sample_means, m)
 
 ## Elaborando um histograma com a distribuição empírica das médias amostrais
-bpd.DataFrame().assign(sample_means = sample_means) \
+pd.DataFrame().assign(sample_means = sample_means) \
                .plot(kind = 'hist', bins = np.arange(10, 25, 0.5), density = True, ec = 'w',
                      title = f'Distribuição Amostral Empírica da Média Amostral com $n = {sample_size}$',
                      figsize = (10, 5));    
@@ -859,7 +932,7 @@ plt.ylabel('Densidade');
 
 
     
-![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_87_0.png)
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_88_0.png)
     
 
 
@@ -887,11 +960,11 @@ sample_means = np.array([])
 
 ## Amostrando, calculando médias amostrais e agregando ao array
 for n in np.arange(repetitions):
-    m = united.sample(sample_size).get('Delay').mean()
+    m = united.sample(sample_size)['Delay'].mean()
     sample_means = np.append(sample_means, m)
 
 ## Elaborando um histograma com a distribuição empírica das médias amostrais
-bpd.DataFrame().assign(sample_means = sample_means) \
+pd.DataFrame().assign(sample_means = sample_means) \
                .plot(kind = 'hist', bins = np.arange(10, 25, 0.5), density = True, ec = 'w',
                      title = f'Distribuição Amostral Empírica da Média Amostral com $n = {sample_size}$',
                      figsize = (10, 5));    
@@ -902,13 +975,13 @@ plt.ylabel('Densidade');
 
 
     
-![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_93_0.png)
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_94_0.png)
     
 
 
 ### Exercício ✅
 
-Na célula acima, geramos amostras de vôos de tamanho $n = 1.000$ um número $B = 2.000$ de vezes. Se ao invés disso continuarmos gerando $B = 2.000$ amostras, mas agora tomando amostras de tamanho $n = 10.000$, qual você acha que será o efeito sobre a distribuição empírica da média amostral? 
+Na célula acima, geramos amostras de vôos de tamanho $n = 1.000$ um número $M = 2.000$ de vezes. Se ao invés disso continuarmos gerando $B = M.000$ amostras, mas agora tomando amostras de tamanho $n = 10.000$, qual você acha que será o efeito sobre a distribuição empírica da média amostral? 
 
 A.  A distribuição empírica ficará "mais estreita" (menos dispersa).
 

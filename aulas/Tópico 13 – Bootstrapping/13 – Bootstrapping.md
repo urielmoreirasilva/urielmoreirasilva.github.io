@@ -17,7 +17,6 @@ Material adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (
 ```python
 # Imports para esse tópico.
 import numpy as np
-import babypandas as bpd
 import pandas as pd
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
@@ -39,12 +38,153 @@ population = pd.read_csv('data/2022_salaries.csv')
 population
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>EmployerType</th>
+      <th>EmployerName</th>
+      <th>DepartmentOrSubdivision</th>
+      <th>...</th>
+      <th>EmployerCounty</th>
+      <th>SpecialDistrictActivities</th>
+      <th>IncludesUnfundedLiability</th>
+      <th>SpecialDistrictType</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022</td>
+      <td>City</td>
+      <td>San Diego</td>
+      <td>Police</td>
+      <td>...</td>
+      <td>San Diego</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022</td>
+      <td>City</td>
+      <td>San Diego</td>
+      <td>Police</td>
+      <td>...</td>
+      <td>San Diego</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022</td>
+      <td>City</td>
+      <td>San Diego</td>
+      <td>Fire-Rescue</td>
+      <td>...</td>
+      <td>San Diego</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>12826</th>
+      <td>2022</td>
+      <td>City</td>
+      <td>San Diego</td>
+      <td>Public Utilities</td>
+      <td>...</td>
+      <td>San Diego</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12827</th>
+      <td>2022</td>
+      <td>City</td>
+      <td>San Diego</td>
+      <td>Police</td>
+      <td>...</td>
+      <td>San Diego</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12828</th>
+      <td>2022</td>
+      <td>City</td>
+      <td>San Diego</td>
+      <td>Police</td>
+      <td>...</td>
+      <td>San Diego</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>12829 rows × 29 columns</p>
+</div>
+
+
+
 Quando trabalhamos com um base de dados com um número grande de colunas, não conseguimos visualizá-las todas ao mesmo tempo. Nesses casos, é sempre uma boa ideia analisarmos os nomes das colunas.
 
 
 ```python
 population.columns
 ```
+
+
+
+
+    Index(['Year', 'EmployerType', 'EmployerName', 'DepartmentOrSubdivision',
+           'Position', 'ElectedOfficial', 'Judicial', 'OtherPositions',
+           'MinPositionSalary', 'MaxPositionSalary', 'ReportedBaseWage',
+           'RegularPay', 'OvertimePay', 'LumpSumPay', 'OtherPay', 'TotalWages',
+           'DefinedBenefitPlanContribution', 'EmployeesRetirementCostCovered',
+           'DeferredCompensationPlan', 'HealthDentalVision',
+           'TotalRetirementAndHealthContribution', 'PensionFormula', 'EmployerURL',
+           'EmployerPopulation', 'LastUpdatedDate', 'EmployerCounty',
+           'SpecialDistrictActivities', 'IncludesUnfundedLiability',
+           'SpecialDistrictType'],
+          dtype='object')
+
+
 
 Como aqui estamos interessados apenas nos salários totais (`'TotalWages'`), selecionaremos apenas essa coluna.
 
@@ -59,11 +199,77 @@ population
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TotalWages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>384909</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>381566</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>350013</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>12826</th>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>12827</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>12828</th>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>12829 rows × 1 columns</p>
+</div>
+
+
+
+
 ```python
 population.plot(kind = 'hist', bins = np.arange(0, 400000, 10000), density = True, ec = 'w', figsize = (10, 5),
                 title = 'Distribuição dos Salários Totais dos Funcionários Públicos da cidade de San Diego em 2022')
 plt.ylabel('Densidade');
 ```
+
+
+    
+![png](13%20%E2%80%93%20Bootstrapping_files/13%20%E2%80%93%20Bootstrapping_8_0.png)
+    
+
 
 #### Salário mediano na população
 
@@ -76,6 +282,13 @@ plt.ylabel('Densidade');
 population_median = population['TotalWages'].mean()
 population_median
 ```
+
+
+
+
+    82015.97833034532
+
+
 
 #### Salário mediano na amostra
 
@@ -109,6 +322,66 @@ my_sample = population.sample(500)
 my_sample
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TotalWages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>9033</th>
+      <td>48705</td>
+    </tr>
+    <tr>
+      <th>5749</th>
+      <td>85814</td>
+    </tr>
+    <tr>
+      <th>385</th>
+      <td>194013</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4295</th>
+      <td>101531</td>
+    </tr>
+    <tr>
+      <th>653</th>
+      <td>176438</td>
+    </tr>
+    <tr>
+      <th>7600</th>
+      <td>64136</td>
+    </tr>
+  </tbody>
+</table>
+<p>500 rows × 1 columns</p>
+</div>
+
+
+
 Nesse notebook, não vamos mais modificar `my_sample`, então esse DataFrame vai sempre se referir à essa amostra em particular.
 
 A mediana amostral dos salários, isto é, a mediana da coluna `TotalWages` em `my_sample`, é igual a:
@@ -118,6 +391,13 @@ A mediana amostral dos salários, isto é, a mediana da coluna `TotalWages` em `
 sample_median = my_sample['TotalWages'].median()
 sample_median
 ```
+
+
+
+
+    73264.5
+
+
 
 ### E o quão "confiantes" podemos estar que uma estimativa é uma boa estimativa? 🤔
 
@@ -148,6 +428,13 @@ sample_medians
 ```
 
 
+
+
+    array([80112. , 80582. , 79678.5, ..., 76866.5, 80390. , 78297.5])
+
+
+
+
 ```python
 (pd.DataFrame({"SampleMedians" : sample_medians})
     .plot(kind = 'hist', density = True,
@@ -156,6 +443,12 @@ sample_medians
 )
 plt.ylabel("Densidade");
 ```
+
+
+    
+![png](13%20%E2%80%93%20Bootstrapping_files/13%20%E2%80%93%20Bootstrapping_29_0.png)
+    
+
 
 ### E porque essa abordagem é inviável?
 
@@ -183,6 +476,18 @@ for i in np.arange(10):
     print("Resample: ", resample, "    Median: ", np.median(resample))
 ```
 
+    Resample:  [1 3 2]     Median:  2.0
+    Resample:  [2 3 1]     Median:  2.0
+    Resample:  [3 2 1]     Median:  2.0
+    Resample:  [2 3 1]     Median:  2.0
+    Resample:  [3 2 1]     Median:  2.0
+    Resample:  [3 2 1]     Median:  2.0
+    Resample:  [1 2 3]     Median:  2.0
+    Resample:  [1 2 3]     Median:  2.0
+    Resample:  [1 3 2]     Median:  2.0
+    Resample:  [2 1 3]     Median:  2.0
+    
+
 - Vamos agora repetir o mesmo experimento, mas dessa vez reamostrando **com reposição**:
 
 
@@ -192,6 +497,18 @@ for i in np.arange(10):
     resample = np.random.choice(original, 3, replace=True)
     print("Resample: ", resample, "    Median: ", np.median(resample))
 ```
+
+    Resample:  [3 1 2]     Median:  2.0
+    Resample:  [1 1 3]     Median:  1.0
+    Resample:  [3 1 1]     Median:  1.0
+    Resample:  [3 3 1]     Median:  3.0
+    Resample:  [2 1 3]     Median:  2.0
+    Resample:  [1 2 3]     Median:  2.0
+    Resample:  [1 2 3]     Median:  2.0
+    Resample:  [2 3 3]     Median:  3.0
+    Resample:  [3 3 1]     Median:  3.0
+    Resample:  [1 1 3]     Median:  1.0
+    
 
 Concluímos com esse exemplo que:
     
@@ -240,6 +557,13 @@ for i in range(n_resamples):
 boot_medians
 ```
 
+
+
+
+    array([84438.12, 78331.71, 80288.7 , ..., 81285.45, 77816.16, 76002.23])
+
+
+
 - O resultado do processo descrito acima é uma **distribuição boostrap**, que então utilizamos como uma _aproximação_ para a **distribuição amostral** da mediana amostral.
     - Em outras palavras, a distribuição bootstrap é uma **distribuição amostral empírica** da mediana amostral.
 
@@ -261,6 +585,12 @@ plt.legend()
 plt.ylabel("Densidade");
 ```
 
+
+    
+![png](13%20%E2%80%93%20Bootstrapping_files/13%20%E2%80%93%20Bootstrapping_50_0.png)
+    
+
+
 _Apenas para termos uma referência_ do quão boa é nossa inferência, a mediana populacional é reportada no histograma acima como um <span style="color:blue"><b>ponto azul</b></span>.
 
 **Lembre porém que, na maior parte das situações, não temos acesso à essa informação!**
@@ -273,6 +603,13 @@ Lembre que, aqui, iniciamos apenas com a mediana amostral:
 ```python
 my_sample['TotalWages'].median()
 ```
+
+
+
+
+    73264.5
+
+
 
 Com base nessa estimativa, podemos dizer apenas que o salário mediano da população é "aproximadamente" \\$76,237, mas não muito mais do que isso.
 
@@ -289,6 +626,12 @@ plt.legend()
 plt.ylabel("Densidade");
 ```
 
+
+    
+![png](13%20%E2%80%93%20Bootstrapping_files/13%20%E2%80%93%20Bootstrapping_56_0.png)
+    
+
+
 e essa distribuição nos permite realizar afirmações do tipo
 
 > "Com uma frequência razoável", o salário mediano na população está entre \\$68,000 e \\$82,000.
@@ -299,7 +642,7 @@ e essa distribuição nos permite realizar afirmações do tipo
 
 Suponha que em uma pesquisa eleitoral tenhamos coletado uma amostra de $n$ eleitores, e estejamos interessados na proporção de eleitores que disseram votariam no candidato A. 
 
-Escreva na célula abaixo um simples _pseudoalgoritmo_ detalhando como utilizar o bootstrap para aproximar a distribuição amostral da proporção amostral nesse caso.ral.
+Escreva na célula abaixo um simples _pseudoalgoritmo_ detalhando como utilizar o bootstrap para aproximar a distribuição amostral da proporção amostral nesse caso.
 
 
 
@@ -327,9 +670,23 @@ np.percentile([4, 6, 9, 2, 7], 50)
 ```
 
 
+
+
+    6.0
+
+
+
+
 ```python
 np.percentile([2, 4, 6, 7, 9], 50)
 ```
+
+
+
+
+    6.0
+
+
 
 Voltando ao nosso exemplo dos salários, temos uma distribuição boostrap da mediana amostral:
 
@@ -340,6 +697,12 @@ plt.scatter(population_median, 0.000004, color = 'blue', s = 100, label = 'popul
 plt.legend()
 plt.ylabel("Densidade");
 ```
+
+
+    
+![png](13%20%E2%80%93%20Bootstrapping_files/13%20%E2%80%93%20Bootstrapping_69_0.png)
+    
+
 
 Com base nessa distribuição, o que podemos então afirmar em termos de percentis?
 
@@ -354,10 +717,24 @@ np.percentile(boot_medians, 0)
 ```
 
 
+
+
+    71253.934
+
+
+
+
 ```python
 ## Percentil 1
 np.percentile(boot_medians, 1)
 ```
+
+
+
+
+    74610.07153999999
+
+
 
 
 ```python
@@ -366,10 +743,24 @@ np.percentile(boot_medians, 5)
 ```
 
 
+
+
+    76590.21310000001
+
+
+
+
 ```python
 ## Percentil 10
 np.percentile(boot_medians, 10)
 ```
+
+
+
+
+    77578.1168
+
+
 
 
 ```python
@@ -378,10 +769,24 @@ np.percentile(boot_medians, 20)
 ```
 
 
+
+
+    78670.576
+
+
+
+
 ```python
 ## Percentil 50
 np.percentile(boot_medians, 50)
 ```
+
+
+
+
+    80690.01000000001
+
+
 
 
 ```python
@@ -390,16 +795,37 @@ np.percentile(boot_medians, 80)
 ```
 
 
+
+
+    82765.072
+
+
+
+
 ```python
 ## Percentil 90
 np.percentile(boot_medians, 90)
 ```
 
 
+
+
+    83877.19099999999
+
+
+
+
 ```python
 ## Percentil 100
 np.percentile(boot_medians, 100)
 ```
+
+
+
+
+    90755.442
+
+
 
 
 ```python
@@ -414,6 +840,12 @@ print(boot_medians.min())
 print(np.percentile(boot_medians, 100))
 print(boot_medians.max())
 ```
+
+    71253.934
+    71253.934
+    90755.442
+    90755.442
+    
 
 **Nota**: os percentis acima se referem aos percentis da _distribuição bootstrap_, e não da _distribuição de salários_! 
 
@@ -447,11 +879,25 @@ boot_medians
 ```
 
 
+
+
+    array([84438.12, 78331.71, 80288.7 , ..., 81285.45, 77816.16, 76002.23])
+
+
+
+
 ```python
 ## "Limite inferior": `L`
 L = np.percentile(boot_medians, 2.5)
 L
 ```
+
+
+
+
+    75653.6618
+
+
 
 
 ```python
@@ -461,10 +907,24 @@ U
 ```
 
 
+
+
+    85654.0539
+
+
+
+
 ```python
 ## Intervalo bootstrap: `[L, U]`
 [L, U]
 ```
+
+
+
+
+    [75653.6618, 85654.0539]
+
+
 
 #### Visualizando os percentis
 
@@ -478,6 +938,12 @@ plt.scatter(population_median, 0.000004, color = 'blue', s = 100, label = 'popul
 plt.legend()
 plt.ylabel("Densidade");
 ```
+
+
+    
+![png](13%20%E2%80%93%20Bootstrapping_files/13%20%E2%80%93%20Bootstrapping_99_0.png)
+    
+
 
 > Podemos afirmar então, com "$\gamma = 95\%$ _de confiança_", que a mediana populacional está entre \\$65.624,50 e \\$81.341,00.
 
@@ -538,6 +1004,13 @@ for i in range(n_resamples):
 boot_maxes
 ```
 
+
+
+
+    array([260845., 334473., 258995., ..., 334473., 334473., 260845.])
+
+
+
 #### Visualizando os resultados
 
 Como aqui temos acesso à população (lembro que em geral isso não acontece!), podemos encontrar o máximo populacional direto (sem bootstrap), apenas para comparação:
@@ -547,6 +1020,13 @@ Como aqui temos acesso à população (lembro que em geral isso não acontece!),
 population_max = population['TotalWages'].max()
 population_max
 ```
+
+
+
+
+    384909
+
+
 
 Será então que o máximo populacional se encontra na parte com maior densidade na distribuição bootstrap, da mesma forma como aconteceu anteriormente com a mediana amostral?
 
@@ -564,6 +1044,12 @@ plt.legend();
 plt.ylabel("Densidade");
 ```
 
+
+    
+![png](13%20%E2%80%93%20Bootstrapping_files/13%20%E2%80%93%20Bootstrapping_116_0.png)
+    
+
+
 Na verdade não! A distribuição bootstrap não captura muito bem o máximo populacional, representado no histograma acima pelo <span style="color:blue"><b>ponto azul</b></span> igual a \$384,909.
 
 > E porque não?! 🤔
@@ -572,6 +1058,13 @@ Na verdade não! A distribuição bootstrap não captura muito bem o máximo pop
 ```python
 my_sample['TotalWages'].max()
 ```
+
+
+
+
+    334473
+
+
 
 - O maior valor na nossa amostra original é de \\$334,473. Logo, o maior valor na nossa amostra bootstrap será _no máximo igual_ a \\$334,473!
     - Em outras palavras, para estatísticas como o máximo _não teremos variabilidade o suficiente_ no bootstrap para aproximarmos bem a distribuição amostral, e como consequência o método não produz bons resultados.

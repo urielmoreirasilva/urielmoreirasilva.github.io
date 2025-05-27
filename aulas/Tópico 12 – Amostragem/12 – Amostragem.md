@@ -17,7 +17,6 @@ Material adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (
 ```python
 # Imports para esse tópico
 import numpy as np
-import babypandas as bpd
 import pandas as pd
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
@@ -153,7 +152,7 @@ many_rolls
 
 
 
-    array([3, 5, 6, ..., 3, 6, 6])
+    array([6, 1, 5, ..., 5, 5, 1])
 
 
 
@@ -248,6 +247,37 @@ então a **proporção** do número de vezes que um evento ocorre se aproxima ca
 
 - A Lei dos Grandes Números **essencialmente garante que o uso de simulações para aproximar distribuições de probabilidade esteja correto**!
 
+### Exercício ✅
+
+Na célula abaixo, o método `value_counts` de Pandas conta a frequência absoluta de cada valor do DataFrame correspondente. Transformamos então essa frequência absoluta em relativa e a expressamos em percentual ao multiplicar o resultado por 100 e dividir pelo número total de elementos no array original.
+
+Modifique então o número de lançamentos `num_rolls` na célula abaixo até que a diferença entre a frequência relativa de cada resultado e a frequência teórica (i.e. 1/6 = 16,67\%) seja menor que 0,2\%.
+
+<ins>_Dica_</ins>: _Fixe a semente aleatória com `np.random.seed()` antes de invocar `np.random.choice` para garantir que a célula retorne o mesmo resultado à cada execução._
+
+
+```python
+## Número de lançamentos
+num_rolls = int(1e2) # int(1e2) = 10^2 = 100 
+many_rolls = np.random.choice(die_faces, num_rolls)
+
+## Frequência de cada resultado (em %) 
+1e2*pd.DataFrame(many_rolls).value_counts()/many_rolls.size
+```
+
+
+
+
+    3    26.0
+    5    21.0
+    1    18.0
+    6    14.0
+    2    13.0
+    4     8.0
+    dtype: float64
+
+
+
 ## Amostragem
 
 ### Populações e amostras
@@ -296,7 +326,7 @@ np.random.choice(colleges, 3, replace = False)
 
 
 
-    array(['UFMG', 'UEMG', 'UFSCar'], dtype='<U7')
+    array(['UFRJ', 'UFRGS', 'UFMG'], dtype='<U7')
 
 
 
@@ -445,39 +475,39 @@ united_full.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>7210</th>
-      <td>7/19/15</td>
-      <td>579</td>
-      <td>DEN</td>
-      <td>6</td>
+      <th>6565</th>
+      <td>7/14/15</td>
+      <td>2000</td>
+      <td>PHX</td>
+      <td>73</td>
     </tr>
     <tr>
-      <th>12118</th>
-      <td>8/20/15</td>
-      <td>322</td>
-      <td>SEA</td>
-      <td>135</td>
+      <th>1172</th>
+      <td>6/8/15</td>
+      <td>1914</td>
+      <td>IAH</td>
+      <td>4</td>
     </tr>
     <tr>
-      <th>9607</th>
-      <td>8/3/15</td>
-      <td>1751</td>
-      <td>LAS</td>
-      <td>144</td>
-    </tr>
-    <tr>
-      <th>5820</th>
-      <td>7/10/15</td>
-      <td>249</td>
+      <th>11380</th>
+      <td>8/14/15</td>
+      <td>1993</td>
       <td>IAD</td>
-      <td>6</td>
+      <td>-3</td>
     </tr>
     <tr>
-      <th>5943</th>
-      <td>7/10/15</td>
-      <td>1717</td>
-      <td>ORD</td>
-      <td>51</td>
+      <th>5612</th>
+      <td>7/8/15</td>
+      <td>1645</td>
+      <td>IAD</td>
+      <td>112</td>
+    </tr>
+    <tr>
+      <th>8954</th>
+      <td>7/30/15</td>
+      <td>1250</td>
+      <td>IAH</td>
+      <td>78</td>
     </tr>
   </tbody>
 </table>
@@ -520,39 +550,39 @@ united_full.iloc[np.random.choice(united_full.index, 5, replace = False)]
   </thead>
   <tbody>
     <tr>
-      <th>3376</th>
-      <td>6/23/15</td>
-      <td>1122</td>
-      <td>HNL</td>
-      <td>43</td>
+      <th>11420</th>
+      <td>8/15/15</td>
+      <td>760</td>
+      <td>JFK</td>
+      <td>6</td>
     </tr>
     <tr>
-      <th>5818</th>
-      <td>7/10/15</td>
-      <td>217</td>
-      <td>BOS</td>
-      <td>66</td>
+      <th>5028</th>
+      <td>7/4/15</td>
+      <td>1984</td>
+      <td>SEA</td>
+      <td>8</td>
     </tr>
     <tr>
-      <th>460</th>
-      <td>6/4/15</td>
-      <td>325</td>
-      <td>BOS</td>
-      <td>-2</td>
+      <th>5316</th>
+      <td>7/6/15</td>
+      <td>1927</td>
+      <td>IAH</td>
+      <td>22</td>
     </tr>
     <tr>
-      <th>7245</th>
-      <td>7/19/15</td>
-      <td>1168</td>
-      <td>EWR</td>
-      <td>-2</td>
+      <th>4487</th>
+      <td>6/30/15</td>
+      <td>1743</td>
+      <td>LAX</td>
+      <td>10</td>
     </tr>
     <tr>
-      <th>9540</th>
+      <th>9596</th>
       <td>8/3/15</td>
-      <td>1122</td>
-      <td>HNL</td>
-      <td>31</td>
+      <td>1710</td>
+      <td>LAX</td>
+      <td>100</td>
     </tr>
   </tbody>
 </table>
@@ -595,39 +625,39 @@ united_full.sample(5, replace = True)
   </thead>
   <tbody>
     <tr>
-      <th>11665</th>
-      <td>8/17/15</td>
-      <td>276</td>
-      <td>EWR</td>
-      <td>8</td>
+      <th>1964</th>
+      <td>6/14/15</td>
+      <td>391</td>
+      <td>SEA</td>
+      <td>-1</td>
     </tr>
     <tr>
-      <th>3088</th>
-      <td>6/21/15</td>
-      <td>1298</td>
-      <td>DEN</td>
+      <th>11016</th>
+      <td>8/12/15</td>
+      <td>1717</td>
+      <td>ORD</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1986</th>
+      <td>6/14/15</td>
+      <td>624</td>
+      <td>ORD</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>9981</th>
+      <td>8/6/15</td>
+      <td>433</td>
+      <td>LAX</td>
       <td>20</td>
     </tr>
     <tr>
-      <th>5064</th>
-      <td>7/5/15</td>
-      <td>525</td>
-      <td>LAS</td>
-      <td>-9</td>
-    </tr>
-    <tr>
-      <th>8064</th>
-      <td>7/24/15</td>
-      <td>1583</td>
-      <td>EWR</td>
-      <td>-3</td>
-    </tr>
-    <tr>
-      <th>9945</th>
-      <td>8/5/15</td>
-      <td>1937</td>
-      <td>IAH</td>
-      <td>31</td>
+      <th>1787</th>
+      <td>6/12/15</td>
+      <td>1723</td>
+      <td>KOA</td>
+      <td>-2</td>
     </tr>
   </tbody>
 </table>
@@ -726,7 +756,7 @@ plt.ylabel('Densidade');
 
 
     
-![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_48_0.png)
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_50_0.png)
     
 
 
@@ -758,7 +788,7 @@ plt.ylabel('Frequência');
 
 
     
-![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_51_0.png)
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_53_0.png)
     
 
 
@@ -832,7 +862,7 @@ united.sample(sample_size)['Delay'].mean()
 
 
 
-    10.8
+    16.11
 
 
 
@@ -859,7 +889,7 @@ united.sample(sample_size)['Delay'].mean()
 
 
 
-    16.237
+    18.315
 
 
 
@@ -932,7 +962,7 @@ plt.ylabel('Densidade');
 
 
     
-![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_88_0.png)
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_90_0.png)
     
 
 
@@ -975,23 +1005,23 @@ plt.ylabel('Densidade');
 
 
     
-![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_94_0.png)
+![png](12%20%E2%80%93%20Amostragem_files/12%20%E2%80%93%20Amostragem_96_0.png)
     
 
 
 ### Exercício ✅
 
-Na célula acima, geramos amostras de vôos de tamanho $n = 1.000$ um número $M = 2.000$ de vezes. Se ao invés disso continuarmos gerando $B = M.000$ amostras, mas agora tomando amostras de tamanho $n = 10.000$, qual você acha que será o efeito sobre a distribuição empírica da média amostral? 
+Na célula acima, geramos amostras de vôos de tamanho $n = 1.000$ um número $M = 2.000$ de vezes. Se ao invés disso continuarmos gerando $M = 2.000$ amostras, mas agora tomando amostras de tamanho $n = 10.000$, qual você acha que será o efeito sobre a distribuição empírica da média amostral? 
 
-A.  A distribuição empírica ficará "mais estreita" (menos dispersa).
+**A**.  A distribuição empírica ficará "mais estreita" (menos dispersa).
 
-B.  A distribuição empírica ficará "mais larga" (mais dispersa).
+**B**.  A distribuição empírica ficará "mais larga" (mais dispersa).
 
-C.  A distribuição empírica será deslocada para a esquerda.
+**C**.  A distribuição empírica será deslocada para a esquerda.
 
-D.  A distribuição empírica será deslocada para a direita.
+**D**.  A distribuição empírica será deslocada para a direita.
 
-E.  Nenhum efeito.
+**E**.  A mudança não terá nenhum efeito.
 
 ## Resumo
 

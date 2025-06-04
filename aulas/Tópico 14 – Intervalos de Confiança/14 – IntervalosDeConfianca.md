@@ -1,4 +1,4 @@
-# Tópico 14 – Intervalos de Confiança [<img src="images/colag_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 6.5%;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2014%20%E2%80%93%20IntervalosDeConfianca.ipynb/14%20%E2%80%93%20IntervalosDeConfianca.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 3.25%;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2014%20%E2%80%93%20IntervalosDeConfianca.ipynb/14%20%E2%80%93%20IntervalosDeConfianca.ipynb)
+# Tópico 14 – Intervalos de Confiança [<img src="images/colag_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 6.5%;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2014%20%E2%80%93%20Intervalos%20de%20Confian%C3%A7a%2F14%20%E2%80%93%20IntervalosDeConfianca.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 3.25%;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2014%20%E2%80%93%20Intervalos%20de%20Confian%C3%A7a%2F14%20%E2%80%93%20IntervalosDeConfianca.ipynb)
 
 Nessa aula, vamos aprender mais sobre a quantificação da incerteza sobre uma estimativa através de um conceito chave em Estatística: os Intervalos de Confiança.
 
@@ -435,12 +435,9 @@ plt.ylabel("Densidade");
 
 ### Exercício ✅
 
-Modifique `gamma` na célula abaixo até encontrar um intervalo de confiança que _não contenha_ o verdadeiro valor do parâmetro, `population_median`.
-
-
-```python
+Modifique `gamma` na célula abaixo (converta a célula antes para uma célula de código!) até encontrar um intervalo de confiança que _não contenha_ o verdadeiro valor do parâmetro, `population_median`.
 ## Nível de confiança: gamma \in [0, 1]
-gamma = 0.95
+gamma = ...
 L = np.percentile(boot_medians, 100*(1 - gamma)/2)
 U = np.percentile(boot_medians, 100*(1 + gamma)/2)
 print(f'Nosso IC{int(100*gamma)}% é dado por:')
@@ -455,22 +452,6 @@ plt.plot([L, U], [0, 0], color = 'gold', linewidth = 12, label = f'{int(100*gamm
 plt.scatter(population_median, 0.000004, color = 'blue', s = 100, label = 'population median', zorder = 3)
 plt.legend()
 plt.ylabel("Densidade");
-```
-
-    Nosso IC95% é dado por:
-    [65624.5, 81341.0]
-    
-    Nosso parâmetro é igual a:
-    78136.0
-    
-    
-
-
-    
-![png](14%20%E2%80%93%20IntervalosDeConfianca_files/14%20%E2%80%93%20IntervalosDeConfianca_47_1.png)
-    
-
-
 #### O efeito do tamanho amostral
 
 - Levando em conta a discussão sobre o _tradeoff_ entre precisão e confiança, naturalmente surge a seguinte pergunta: "para um dado nível de confiança $\gamma\%$ **fixo**, como então podemos fazer com que nosso IC seja mais **curto**/preciso?
@@ -617,7 +598,7 @@ E porque não?
 
 ### Exercício ✅
 
-Suponha que tenhamos calculado um intervalo de confiança de $\gamma = 95\%$ para a média populacional $\mu$ de salários dos funcionários públicos da cidade de San Diego, e que esse intervalo seja aproximadamente igual a $[\$65.000,00; \$80.000,00]$. Com respeito à interpretação desse IC, assinale abaixo a alternativa **correta**:
+Suponha que tenhamos calculado um intervalo de confiança de $\gamma = 95\%$ para a média populacional $\mu$ de salários dos funcionários públicos da cidade de San Diego, e que esse intervalo seja aproximadamente igual a $[\$65.000,00; \$80.000,00]$. Com respeito à interpretação desse IC, preencha a célula de texto abaixo com a alternativa **correta**:
 
 **A**. 95\% de todos os salários dos funcionários públicos da cidade de San Diego estão entre \\$65.000,00 e \\$80.000,00.
 
@@ -626,6 +607,8 @@ Suponha que tenhamos calculado um intervalo de confiança de $\gamma = 95\%$ par
 **C**. É possível afirmar, com 95\% de confiança, que a média populacional de salários dos funcionários públicos da cidade de San Diego está entre \\$65.000,00 e \\$80.000,00.
 
 **D**. A probabilidade de que um funcionário público da cidade de San Diego escolhido aleatoriamente ganhe entre \\$65.000,00 e \\$80.000,00 é de $\gamma = 95\%$.
+
+> ...
 
 ## Resumo
 

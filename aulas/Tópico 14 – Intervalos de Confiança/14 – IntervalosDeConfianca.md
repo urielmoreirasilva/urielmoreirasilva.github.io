@@ -435,23 +435,28 @@ plt.ylabel("Densidade");
 
 ### Exercício ✅
 
-Modifique `gamma` na célula abaixo (converta a célula antes para uma célula de código!) até encontrar um intervalo de confiança que _não contenha_ o verdadeiro valor do parâmetro, `population_median`.
-## Nível de confiança: gamma \in [0, 1]
-gamma = ...
-L = np.percentile(boot_medians, 100*(1 - gamma)/2)
-U = np.percentile(boot_medians, 100*(1 + gamma)/2)
-print(f'Nosso IC{int(100*gamma)}% é dado por:')
-print([L, U])
+Modifique `gamma` na célula abaixo até encontrar um intervalo de confiança que _não contenha_ o verdadeiro valor do parâmetro, `population_median`.
 
-print(f'\nNosso parâmetro é igual a:')
-print(population_median)
 
-print('')
-pd.DataFrame({"BootstrapMedians" : boot_medians}).plot(kind = 'hist', density = True, bins = np.arange(63000, 88000, 1000), ec = 'w', figsize = (10, 5))
-plt.plot([L, U], [0, 0], color = 'gold', linewidth = 12, label = f'{int(100*gamma)}% confidence interval', zorder = 2);
-plt.scatter(population_median, 0.000004, color = 'blue', s = 100, label = 'population median', zorder = 3)
-plt.legend()
-plt.ylabel("Densidade");
+```python
+# ## Descomente e execute!
+# gamma = ...
+# L = np.percentile(boot_medians, 100*(1 - gamma)/2)
+# U = np.percentile(boot_medians, 100*(1 + gamma)/2)
+# print(f'Nosso IC{int(100*gamma)}% é dado por:')
+# print([L, U])
+
+# print(f'\nNosso parâmetro é igual a:')
+# print(population_median)
+
+# print('')
+# pd.DataFrame({"BootstrapMedians" : boot_medians}).plot(kind = 'hist', density = True, bins = np.arange(63000, 88000, 1000), ec = 'w', figsize = (10, 5))
+# plt.plot([L, U], [0, 0], color = 'gold', linewidth = 12, label = f'{int(100*gamma)}% confidence interval', zorder = 2);
+# plt.scatter(population_median, 0.000004, color = 'blue', s = 100, label = 'population median', zorder = 3)
+# plt.legend()
+# plt.ylabel("Densidade");
+```
+
 #### O efeito do tamanho amostral
 
 - Levando em conta a discussão sobre o _tradeoff_ entre precisão e confiança, naturalmente surge a seguinte pergunta: "para um dado nível de confiança $\gamma\%$ **fixo**, como então podemos fazer com que nosso IC seja mais **curto**/preciso?

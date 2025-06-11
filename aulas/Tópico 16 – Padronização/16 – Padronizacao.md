@@ -1,6 +1,6 @@
-# Tópico 16 – Padronização [<img src="images/colag_logo.svg" style="float: right; vertical-align: middle; width: 42px; height: 42px;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%2016/16%20%E2%80%93%20Padronizacao.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 12px; vertical-align: middle; width: 36px; height: 36px;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas/T%C3%B3pico%20106/16%20%E2%80%93%20Padronizacao.ipynb)
+# Tópico 16 – Padronização [<img src="images/colag_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 6.5%;">](https://colab.research.google.com/github/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas%2FT%C3%B3pico%2016%20%E2%80%93%20Padroniza%C3%A7%C3%A3o%2F16%20%E2%80%93%20Padronizacao.ipynb) [<img src="images/github_logo.svg" style="float: right; margin-right: 0%; vertical-align: middle; width: 3.25%;">](https://github.com/urielmoreirasilva/urielmoreirasilva.github.io/blob/main/aulas%2FT%C3%B3pico%2016%20%E2%80%93%20Padroniza%C3%A7%C3%A3o%2F16%20%E2%80%93%20Padronizacao.ipynb)
 
-Nessa aula, vamos introduzir e explorar o conceito de padronização, e motivar a importância de se padronizar certos conjuntos de variáveis para uma análise mais coerente.
+Nesta aula, vamos introduzir e explorar o conceito de padronização, e motivar a importância de se padronizar certos conjuntos de variáveis para uma análise mais coerente.
 
 ### Resultados Esperados
 
@@ -15,14 +15,13 @@ Material adaptado do [DSC10 (UCSD)](https://dsc10.com/) por [Flavio Figueiredo (
 
 
 ```python
-# Imports desse tópico: NumPy, BabyPandas, Pandas e Matplotlib.
+## Imports para esse tópico
 import numpy as np
-import babypandas as bpd
 import pandas as pd
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
-# Opções de "output" do pandas. 
+## Opções de como printar objetos do Numpy e do Pandas
 np.set_printoptions(threshold = 20, precision = 2, suppress = True)
 pd.set_option("display.max_rows", 7)
 pd.set_option("display.max_columns", 8)
@@ -43,8 +42,8 @@ Até agora, na segunda parte do curso focamos em **Inferência Estatística**, q
 
 ### O que vamos ver adiante
 
-- Até o final do curso, nosso foco agora será em realizar **previsões**.
-    - Isto é, com base em uma amostra, podemos dizer algo sobre a parte da população que **não está na amostra**?
+- Até o final do curso, nosso foco de agora em diante será em realizar **previsões**.
+    - Isto é, com base em uma amostra, podemos dizer algo sobre a parte da população que **não está na amostra**? 🤔
 
 - Mais especificamente, vamos nos ater à **regressão linear**, uma técnica de predição que tenta encontrar a "melhor relação linear" entre duas ou mais variáveis numéricas.
     - Você fatalmente trabalhará com regressão linear (e não-linear!) em muitos outros cursos. Essa é uma das ferramentas mais úteis em Ciência de Dados.
@@ -53,20 +52,20 @@ Até agora, na segunda parte do curso focamos em **Inferência Estatística**, q
 
 - Até agora, utilizamos rotineiramente funções como a média e a  mediana, aplicando essas funções tanto em amostras quanto populações.
 - Porém, antes de seguir com o resto do material, precisamos formalizar essas definições, e introduzir outras medidas que utilizaremos para caracterizar uma distribuição de interesse.
+    - Denominamos essas medidas de **estatísticas descritivas**.
 
 ### Medidas de Tendência Central
 
 - Uma medida de **tendência central** descreve _onde_ (ou seja, ao redor de qual valor) uma distribuição está centralizada.
-    - Medidas de tendência central são muitas vezes denominadas de _parâmetros de locação_ de uma distribuição.
-    - A intuição por trás dessa nomenclatura vem do fato de que as distribuições em geral têm padrões de variabilidade _em torno_ das medidas de tendência central, o que é equivalente a dizer que uma distribuição está _localizada_ em torno do seu centro.
-
-- Até agora, já vimos duas medidas de tendência central: a **média** e a **mediana**.
+- Medidas de tendência central são muitas vezes denominadas de _parâmetros de locação_ de uma distribuição.
+- A intuição por trás dessa nomenclatura vem do fato de que as distribuições em geral têm padrões de variabilidade _em torno_ das medidas de tendência central, o que é equivalente a dizer que uma distribuição está _localizada_ em torno do seu centro.
+    - Até agora, já vimos duas medidas de tendência central: a **média** e a **mediana**.
 
 #### Exemplo: Atrasos de vôos ✈️
 
 
 ```python
-delays = bpd.read_csv('data/united_summer2015.csv')
+delays = pd.read_csv('data/united_summer2015.csv')
 delays.plot(kind = 'hist', y = 'Delay', bins = np.arange(-20.5, 210, 5), density = True, ec = 'w', figsize = (10, 5))
 plt.title('Atrasos de Vôos')
 plt.xlabel('Atrasos (em minutos)')
@@ -75,7 +74,7 @@ plt.ylabel("Densidade");
 
 
     
-![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_15_0.png)
+![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_14_0.png)
     
 
 
@@ -83,7 +82,7 @@ plt.ylabel("Densidade");
 
 
 ```python
-delays.get('Delay').mean()
+delays['Delay'].mean()
 ```
 
 
@@ -95,7 +94,7 @@ delays.get('Delay').mean()
 
 
 ```python
-delays.get('Delay').median()
+delays['Delay'].median()
 ```
 
 
@@ -108,9 +107,9 @@ delays.get('Delay').median()
 
 ```python
 delays.plot(kind = 'hist', y = 'Delay', bins = np.arange(-20.5, 210, 5), density = True, ec = 'w', alpha = 0.65, figsize = (10, 5))
-plt.plot([delays.get('Delay').mean(), delays.get('Delay').mean()], [0, 1], color = 'green', label = 'Mean', linewidth = 2)
-plt.scatter([delays.get('Delay').mean()], [-0.0017], color = 'green', marker = '^', s = 250)
-plt.plot([delays.get('Delay').median(), delays.get('Delay').median()], [0, 1], color = 'purple', label = 'Median', linewidth = 2)
+plt.plot([delays['Delay'].mean(), delays['Delay'].mean()], [0, 1], color = 'green', label = 'Mean', linewidth = 2)
+plt.scatter([delays['Delay'].mean()], [-0.0017], color = 'green', marker = '^', s = 250)
+plt.plot([delays['Delay'].median(), delays['Delay'].median()], [0, 1], color = 'purple', label = 'Median', linewidth = 2)
 plt.title('Atrasos de Vôos')
 plt.xlabel('Atrasos (em minutos)')
 plt.ylim(-0.005, 0.065)
@@ -120,7 +119,7 @@ plt.ylabel("Frequência");
 
 
     
-![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_19_0.png)
+![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_18_0.png)
     
 
 
@@ -128,7 +127,7 @@ plt.ylabel("Frequência");
 
 - **Definição**: Soma de todos os elementos da amostra, dividida pelo tamanho amostral $n$.
     - É comum denotarmos a média _populacional_ por $\mu$ e a média _amostral_ por $\bar{X}$.
-    - Denotando nosso conjunto de observações por $\boldsymbol{X} := (X_1, \ldots, X_n)$, definimos então $\bar{X} := \frac{1}{n} \sum^n_{i=1} X_i$.  
+    - Denotando nosso conjunto de observações por $\boldsymbol{X} := (X_1, \ldots, X_n)$, definimos então $\bar{X} := \frac{1}{n} \sum^n_{i=1} X_i$.
 
 - Visualmente, a média amostral pode ser pensada como o "ponto de equilíbrio" de uma distribuição.
     - A soma das diferenças entre cada ponto e a média é sempre igual a 0.
@@ -141,12 +140,10 @@ plt.ylabel("Frequência");
     - Usualmente denotamos a mediana populacional por $med(\boldsymbol{X})$, e a mediana amostral por $\widehat{med}(\boldsymbol{X})$.
 
 - A mediana é o percentil 50 de uma distribuição.
-
 - Se uma distribuição é **simétrica** em torno de um valor, então esse valor coincide com _ambas_ média e mediana.
-
 - Se uma distribuição é **assimétrica** (_à direita_ ou _à esquerda_), então a média será diferente da mediana (respectivamente, à direita ou à esquerda, de acordo com a direção da assimetria).
 
-- **Propriedade importante**: A mediana é mais **robusta** (menos **sensível**) a **_outliers_/valores extremos**.
+> **Propriedade importante**: A mediana é mais **robusta** (menos **sensível**) a **_outliers_/valores extremos/valores discrepantes** que a média.
 
 ### Exercício ✅
 
@@ -159,15 +156,15 @@ Considere os seguintes histogramas, correspondentes a duas distribuições difer
     </tr></table>
 </center>
 
-As médias dessas distribuições são iguais ou diferentes? E suas medianas?
+Preencha agora a célula de texto abaixo com a alternativa **correta** relativa às distribuições acima:
 
-A. Ambas são iguais.
+**A**. Ambas média e mediana são iguais.
 
-B. As médias são diferentes, mas as medianas são iguais.
+**B**. As médias são diferentes, mas as medianas são iguais.
 
-C. As médias são iguais, mas as medianas são diferentes.
+**C**. As médias são iguais, mas as medianas são diferentes.
 
-D. Ambas são diferentes.
+**D**. Ambas média e mediana são diferentes.
 
 ### Medidas de Dispersão
 
@@ -217,8 +214,10 @@ deviations
 
 
 
-Cada entrada em `deviations` mede o desvio do elemento correspondente em `data` em torno da média (aqui, $\bar{X} = 4.25$).
-E qual é o desvio médio, nesse caso?
+Cada entrada em `deviations` mede o desvio do elemento correspondente em `data` em torno da média (aqui, $\bar{X} = 4{,}25$).
+
+E qual é o "desvio médio" (isto é, a média dos desvios) nesse caso?
+
 
 ```python
 np.mean(deviations)
@@ -231,16 +230,16 @@ np.mean(deviations)
 
 
 
-- **Fato**: a média dos desvios em torno da média é _sempre igual a 0_, independente da distribuição ser amostral ou populacional!
-    - Uma consequência disso é que o desvio médio em torno da média acaba não sendo então uma medida útil da dispersão de uma distribuição.
+- **Fato**: a média dos desvios em torno da média é _sempre igual a 0_, independente da distribuição analisada!
+    - Dessa forma, o desvio médio em torno da média não é uma medida útil da dispersão de uma distribuição.
 
 #### Desvios em torno da média, **ao quadrado**
 
-Vamos agora tomar o quadrado dos desvios em torno da média:
+Vamos agora tomar o **quadrado** dos desvios em torno da média:
 
 
 ```python
-# Elevando todos os desvios ao quadrado.
+## Elevando todos os desvios ao quadrado
 deviations ** 2
 ```
 
@@ -251,7 +250,7 @@ deviations ** 2
 
 
 
-e então tomar a média dos desvios ao quadrado:
+... e então tomar a média _dos desvios ao quadrado_, $(X_i - \bar{X})^2$:
 
 
 ```python
@@ -276,7 +275,7 @@ A quantidade calculada acima, isto é, a _média dos desvios quadrados em torno 
 
 
 ```python
-# O desvio padrão (DP) é dado pela raiz quadrada da variância.
+## O desvio padrão (DP) é dado pela raiz quadrada da variância!
 sd = variance ** 0.5
 sd
 ```
@@ -291,7 +290,7 @@ sd
 #### Desvio padrão
 
 - **Definição**: Raiz da média dos desvios (em torno da média) ao quadrado.
-    - Usualmente denotamos a variância populacional por $\sigma^2$, o desvio padrão (DP) populacional por $\sigma$, e os análogos amostrais por $S$ e $S^2$, respectivamente.
+    - Usualmente denotamos a variância populacional por $\sigma^2$, o desvio padrão (DP) populacional por $\sigma$, e os análogos amostrais por $S$ e $S^2$.
 
 Formalmente,
 
@@ -300,11 +299,11 @@ $$\begin{align*}
 \end{align*}$$
 
 - O DP (que também é representado pela sigla em inglês, SD, de _standard deviation_) mede o _quão distantes_ os valores em uma distribuição estão de sua média.
-    - Equivalentemente, o DP mede o quão _dispersos_ são os valores de uma distribuição (em torno de sua média).  
+    - Equivalentemente, **o DP mede o quão dispersos** os valores de uma distribuição (em torno de sua média) são.  
     - Dessa forma, quanto maior o DP, mais dispersos serão os dados.
-    - Lembre que, crucialmente, o desvio padrão é expresso nas mesmas unidades de $\boldsymbol{X}$.
+    - Lembre que, crucialmente, o desvio padrão é _expresso nas mesmas unidades de $\boldsymbol{X}$_.
 
-- A biblioteca `numpy` tem uma função, `np.std`, que calcula o desvio padrão de um conjunto de dados.
+- A biblioteca `numpy` tem uma função, `np.std`, que calcula o desvio padrão de um `Array`:
 
 
 ```python
@@ -322,11 +321,11 @@ np.std(data)
 
 ### Exemplo: Alturas e pesos  📏
 
-Para motivar os conceitos dessa subseção, comecemos com um conjunto de dados com as alturas (em polegadas) e pesos (em libras) de $n = 5,000$ homens adultos.
+Para motivar os conceitos dessa subseção, vamos primeiro começar com um conjunto de dados contendo as alturas (em polegadas) e pesos (em libras) de $n = 5,000$ homens adultos dos EUA:
 
 
 ```python
-height_and_weight = bpd.read_csv('data/height_and_weight.csv')
+height_and_weight = pd.read_csv('data/height_and_weight.csv')
 height_and_weight
 ```
 
@@ -409,34 +408,16 @@ plt.ylabel("Densidade");
 ```
 
 
-    
-![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_61_0.png)
-    
-
-
-
 ```python
 height_and_weight.plot(kind = 'hist', y = 'Weight', density = True, ec = 'w', bins = 30, alpha = 0.8, color = 'C1', figsize = (10, 5))
 plt.ylabel("Densidade");
 ```
 
 
-    
-![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_62_0.png)
-    
-
-
-
 ```python
 height_and_weight.plot(kind = 'hist', density = True, ec='w', bins = 60, alpha = 0.8, figsize = (10, 5))
 plt.ylabel("Densidade");
 ```
-
-
-    
-![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_63_0.png)
-    
-
 
 **Observação**: As duas distribuições acima são similares à versões "deslocadas" e "esticadas" da mesma forma, denominada informalmente de **"curva de sino"** (_bell curve_) 🔔.
 
@@ -463,13 +444,6 @@ weights = height_and_weight.get('Weight')
 (225 - weights.mean()) / np.std(weights)
 ```
 
-
-
-
-    1.9201699181580782
-
-
-
 - Interpretação: 225 está a 1.92 desvios-padrão acima da média dos pesos.
 - 225 libras é igual a 1.92 em unidades padronizadas.
 
@@ -494,38 +468,10 @@ standardized_height
 ```
 
 
-
-
-    0       1.68
-    1      -0.09
-    2       1.78
-            ... 
-    4997   -0.70
-    4998    0.88
-    4999    0.46
-    Name: Height, Length: 5000, dtype: float64
-
-
-
-
 ```python
 standardized_weight = standard_units(height_and_weight.get('Weight'))
 standardized_weight
 ```
-
-
-
-
-    0       2.77
-    1      -1.25
-    2       1.30
-            ... 
-    4997    0.62
-    4998   -0.06
-    4999    0.60
-    Name: Weight, Length: 5000, dtype: float64
-
-
 
 ### O efeito da padronização
 
@@ -542,37 +488,9 @@ standardized_height.describe()
 ```
 
 
-
-
-    count    5.00e+03
-    mean     1.49e-15
-    std      1.00e+00
-               ...   
-    50%      4.76e-04
-    75%      6.85e-01
-    max      3.48e+00
-    Name: Height, Length: 8, dtype: float64
-
-
-
-
 ```python
 standardized_weight.describe()
 ```
-
-
-
-
-    count    5.00e+03
-    mean     5.98e-16
-    std      1.00e+00
-               ...   
-    50%      6.53e-04
-    75%      6.74e-01
-    max      4.19e+00
-    Name: Weight, Length: 8, dtype: float64
-
-
 
 ### Histogramas padronizados
 
@@ -587,12 +505,6 @@ standardized_height_and_weight = bpd.DataFrame().assign(
 standardized_height_and_weight.plot(kind = 'hist', density = True, ec = 'w',bins = 30, alpha = 0.8, figsize = (10, 5))
 plt.ylabel("Densidade");
 ```
-
-
-    
-![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_80_0.png)
-    
-
 
 Ambas distribuições são bem parecidas! 👍
 

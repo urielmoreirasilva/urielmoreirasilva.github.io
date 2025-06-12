@@ -65,7 +65,7 @@ Até agora, na segunda parte do curso focamos em **Inferência Estatística**, q
 
 
 ```python
-delays = pd.read_csv('data/united_summer2015.csv')
+delays = pd.read_csv('https://raw.githubusercontent.com/urielmoreirasilva/urielmoreirasilva.github.io/refs/heads/main/aulas/T%C3%B3pico%2016%20%E2%80%93%20Padroniza%C3%A7%C3%A3o/data/united_summer2015.csv')
 delays.plot(kind = 'hist', y = 'Delay', bins = np.arange(-20.5, 210, 5), density = True, ec = 'w', figsize = (10, 5))
 plt.title('Atrasos de Vôos')
 plt.xlabel('Atrasos (em minutos)')
@@ -151,8 +151,8 @@ Considere os seguintes histogramas, correspondentes a duas distribuições difer
 
 <center>
     <table><tr>
-        <td> <center><img src = "images/hist.jpg" width = 70%></center>  </td>
-        <td> <center><img src = "images/hist2.jpg" width = 70%></center> </td>
+        <td> <center><img src = "https://raw.githubusercontent.com/urielmoreirasilva/urielmoreirasilva.github.io/refs/heads/main/aulas/T%C3%B3pico%2016%20%E2%80%93%20Padroniza%C3%A7%C3%A3o/images/hist.jpg" width = 70%></center>  </td>
+        <td> <center><img src = "https://raw.githubusercontent.com/urielmoreirasilva/urielmoreirasilva.github.io/refs/heads/main/aulas/T%C3%B3pico%2016%20%E2%80%93%20Padroniza%C3%A7%C3%A3o/images/hist2.jpg" width = 70%></center> </td>
     </tr></table>
 </center>
 
@@ -321,11 +321,11 @@ np.std(data)
 
 ### Exemplo: Alturas e pesos  📏
 
-Para motivar os conceitos dessa subseção, vamos primeiro começar com um conjunto de dados contendo as alturas (em polegadas) e pesos (em libras) de $n = 5,000$ homens adultos dos EUA:
+Para motivar os conceitos dessa subseção, vamos primeiro começar com um conjunto de dados contendo as alturas (em polegadas) e pesos (em libras) de $n = 5{,}000$ homens adultos dos EUA:
 
 
 ```python
-height_and_weight = pd.read_csv('data/height_and_weight.csv')
+height_and_weight = pd.read_csv('https://raw.githubusercontent.com/urielmoreirasilva/urielmoreirasilva.github.io/refs/heads/main/aulas/T%C3%B3pico%2016%20%E2%80%93%20Padroniza%C3%A7%C3%A3o/data/height_and_weight.csv')
 height_and_weight
 ```
 
@@ -399,7 +399,7 @@ height_and_weight
 
 ### Distribuições das alturas e pesos
 
-Vamos analisar a distribuição das variáveis do nosso conjunto.
+Primeiramente, vamos analisar a distribuição das variáveis do nosso conjunto de dados.
 
 
 ```python
@@ -408,10 +408,22 @@ plt.ylabel("Densidade");
 ```
 
 
+    
+![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_52_0.png)
+    
+
+
+
 ```python
 height_and_weight.plot(kind = 'hist', y = 'Weight', density = True, ec = 'w', bins = 30, alpha = 0.8, color = 'C1', figsize = (10, 5))
 plt.ylabel("Densidade");
 ```
+
+
+    
+![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_53_0.png)
+    
+
 
 
 ```python
@@ -419,59 +431,101 @@ height_and_weight.plot(kind = 'hist', density = True, ec='w', bins = 60, alpha =
 plt.ylabel("Densidade");
 ```
 
-**Observação**: As duas distribuições acima são similares à versões "deslocadas" e "esticadas" da mesma forma, denominada informalmente de **"curva de sino"** (_bell curve_) 🔔.
 
-Uma distribuição com essa forma é conhecida como **distribuição Normal**.
+    
+![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_54_0.png)
+    
+
+
+As duas distribuições acima são aproximadamente versões "deslocadas" e "esticadas" da mesma forma, denominada informalmente de **"curva de sino"** (_bell curve_) 🔔.
+
+> Mais formalmente, uma distribuição com essa forma é conhecida como **distribuição Normal**.
 
 ### Unidades padronizadas
 
-- Suponha que $X$ seja uma variável aleatória (numérica) com média $\mu$ e desvio padrão $\sigma$, e que $X_i$ seja um valor (realização) dessa variável. Então,
+- Suponha que $\boldsymbol{X} := (X_1, \ldots, X_n)$ seja uma amostra de uma variável numérica com média $\bar{X}$ e desvio padrão $S$. Então,
 
 \begin{align*}
-    X_{i \: \text{(su)}} := \frac{X_i - \mu}{\sigma}
+    X_{i \: \text{(su)}} := \frac{X_i - \bar{X}}{S}
 \end{align*}
 
 representa $X_i$ em **unidades padronizadas**, $i = 1, \ldots, n$.
 
-- Podemos interpretar os valores das unidades padronizadas $X_{i \: \text{(su)}}$ como sendo "o _número de DPs que $X_i$ está de sua média_".
-- Equivalentemente, se $X_{i \: \text{(su)}} = x \in \mathbb{R}$, então podemos dizer que $X_i$ está a $x$ DPs da sua média $\bar{X}$.
+- Podemos interpretar os valores das unidades padronizadas $X_{i \: \text{(su)}}$ como sendo "o _número de DPs ($S$) que $X_i$ está de sua média_ ($\bar{X}$)".
+- Equivalentemente, se $X_{i \: \text{(su)}} = x \in \mathbb{R}$, então podemos dizer que $X_i$ está a $x$ DPs da sua média.
 
 **Exemplo**: Suponha que uma pessoa pese 225 libras. Qual é o seu peso em unidades padronizadas?
 
 
 ```python
-weights = height_and_weight.get('Weight')
+weights = height_and_weight['Weight']
 (225 - weights.mean()) / np.std(weights)
 ```
+
+
+
+
+    1.9201699181580767
+
+
 
 - Interpretação: 225 está a 1.92 desvios-padrão acima da média dos pesos.
 - 225 libras é igual a 1.92 em unidades padronizadas.
 
-**Nota**: a padronização sempre depende do valor de $\mu$ e $\sigma$, que são _específicos_ à cada distribuição. 
+**Nota**: a padronização _sempre_ depende do valor de $\bar{X}$ e $S$, que são _específicos_ à cada distribuição. 
 
 ### Padronização
 
 - O processo de conversão dos valores de uma variável para unidades padronizadas é conhecido como **padronização**. 
 - Consequentemente, os valores $X_{i \: \text{(su)}}$ obtidos através da padronização são ditos **padronizados**.
+- Dessa forma, denominamos $\boldsymbol{X_{\text{(su)}}} := (X_{1 \: \text{(su)}}, \ldots, X_{n \: \text{(su)}})$ de **amostra padronizada**, ou **versão padronizada** de $\boldsymbol{X}$.
 
 
 ```python
-# Função para padronizar as Series de um DataFrame.
+## Função para padronizar as Series de um DataFrame
 def standard_units(col):
     return (col - col.mean()) / np.std(col)
 ```
 
 
 ```python
-standardized_height = standard_units(height_and_weight.get('Height'))
+standardized_height = standard_units(height_and_weight['Height'])
 standardized_height
 ```
 
 
+
+
+    0       1.68
+    1      -0.09
+    2       1.78
+            ... 
+    4997   -0.70
+    4998    0.88
+    4999    0.46
+    Name: Height, Length: 5000, dtype: float64
+
+
+
+
 ```python
-standardized_weight = standard_units(height_and_weight.get('Weight'))
+standardized_weight = standard_units(height_and_weight['Weight'])
 standardized_weight
 ```
+
+
+
+
+    0       2.77
+    1      -1.25
+    2       1.30
+            ... 
+    4997    0.62
+    4998   -0.06
+    4999    0.60
+    Name: Weight, Length: 5000, dtype: float64
+
+
 
 ### O efeito da padronização
 
@@ -479,36 +533,77 @@ Variáveis padronizadas sempre têm:
 - Média = 0.
 - Variância = desvio padrão = 1.
 
-É comum padronizarmos diferentes variáveis simplesmente para termos todas na mesma escala durante a nossa análise.
+É comum padronizarmos diferentes variáveis _simplesmente para termos todas na mesma escala_ para a nossa análise.
 
 
 ```python
-# Lembrete: e-15 = 10^(-15), e assim em diante.
+## Lembrete (notação científica): e-15 = 10^(-15), e assim em diante
 standardized_height.describe()
 ```
+
+
+
+
+    count    5.00e+03
+    mean     1.49e-15
+    std      1.00e+00
+               ...   
+    50%      4.76e-04
+    75%      6.85e-01
+    max      3.48e+00
+    Name: Height, Length: 8, dtype: float64
+
+
 
 
 ```python
 standardized_weight.describe()
 ```
 
+
+
+
+    count    5.00e+03
+    mean     5.95e-16
+    std      1.00e+00
+               ...   
+    50%      6.53e-04
+    75%      6.74e-01
+    max      4.19e+00
+    Name: Weight, Length: 8, dtype: float64
+
+
+
+Mais formalmente, temos:
+
+- $\bar{X}_{\text{(su)}} = 0$ (isto é, a _média de $\boldsymbol{X_{\text{(su)}}}$ é igual a 0_);
+- $S^2_{\text{(su)}} = S_{\text{(su)}} = 1$ (isto é, ambos _variância e desvio padrão de $\boldsymbol{X_{\text{(su)}}}$ são iguais a  1_).
+
 ### Histogramas padronizados
 
-Agora que padronizamos os pesos e as alturas, vamos ver mais uma vez como seus histogramas ficam lado-a-lado:
+Agora que padronizamos os pesos e as alturas do exemplo acima, vamos ver mais uma vez como seus histogramas ficam lado-a-lado:
 
 
 ```python
-standardized_height_and_weight = bpd.DataFrame().assign(
-    Height=standardized_height,
-    Weight=standardized_weight
+standardized_height_and_weight = pd.DataFrame(
+    {
+        "Height" : standardized_height,
+        "Weight" : standardized_weight
+    }
 )
 standardized_height_and_weight.plot(kind = 'hist', density = True, ec = 'w',bins = 30, alpha = 0.8, figsize = (10, 5))
 plt.ylabel("Densidade");
 ```
 
+
+    
+![png](16%20%E2%80%93%20Padronizacao_files/16%20%E2%80%93%20Padronizacao_72_0.png)
+    
+
+
 Ambas distribuições são bem parecidas! 👍
 
-- Nota: embora a padronização mude a locação e a escala de uma distribuição, os percentis, frequências e probabilidades **não se alteram**.
+**Nota**: embora a padronização mude a _locação e a escala_ de uma distribuição, os **percentis, frequências e probabilidades não se alteram**!
 
 ## Resumo
 
@@ -516,5 +611,5 @@ Ambas distribuições são bem parecidas! 👍
 - A variância e o desvio padrão (DP) são medidas de dispersão.
     - O DP é igual a raiz quadrada da variância.
     - Em linhas gerais, o desvio padrão mede, em média, o quão distantes da média os valores de uma distribuição estão.
-- Para converter um valor $X_i$ para unidades padronizadas, fazemos $X_{i \: \text{(su)}} := \frac{X_i - \mu}{\sigma}$.
-    - Valores em unidades padronizadas medem o número de desvios padrão que $X_i$ está acima (ou abaixo) de sua média.
+- Para converter um valor $X_i$ para unidades padronizadas, fazemos $X_{i \: \text{(su)}} := \frac{X_i - \bar{X}}{S}$.
+    - Valores em unidades padronizadas medem o número de desvios padrão ($S$) que $X_i$ está acima (ou abaixo) de sua média ($\bar{X}$).
